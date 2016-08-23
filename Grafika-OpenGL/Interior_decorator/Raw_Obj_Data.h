@@ -2,10 +2,10 @@
 #include <string>
 class RawObjData {
 	public:
-		RawObjData(const RawObjData& example); //kostruktor kopiujący
+		RawObjData(const RawObjData& example); //copy constructor
 		int id;
 		double x, y, z;
-		double RotationX, RotationX, RotationX;
+		double RotationX, RotationY, RotationZ;
 		const std::string ObjFilePath;
 		const std::string ObjUVMapPath;
 		const std::string FragmentShaderPath;

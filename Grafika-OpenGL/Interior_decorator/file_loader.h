@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <fstream>  
+
 #include "Raw_Obj_Data.h"
 class FileLoader {
 	private:
