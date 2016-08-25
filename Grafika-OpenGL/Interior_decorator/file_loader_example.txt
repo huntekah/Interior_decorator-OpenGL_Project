@@ -1,0 +1,20 @@
+#include <iostream>
+#include "file_loader.h"
+
+int main( void )
+{
+	FileLoader file("test.txt");
+	if(file.Load() == 0)
+		std::cout << file << std::endl;		//shows loaded content
+	std::cout << file.data[0].x << std::endl;	// access to X variable of the object 0
+	return 0;
+
+/*
+INFILE DATA STRUCTURE:
+filepath, UVmapPath, FragmentShaderPath, VertexShaderPath,
+ x,y,z,
+rotationX, rotationY, rotationZ;
+ScaleX,  ScaleY, ScaleZ,
+*/
+}
+

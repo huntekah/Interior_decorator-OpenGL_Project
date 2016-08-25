@@ -59,6 +59,10 @@ add_definitions(
 # Our Project Interior Decorator
 add_executable(Interior_decorator
 	Interior_decorator/Interior_decorator.cpp
+	Interior_decorator/file_loader.h
+	Interior_decorator/file_loader.cpp
+	Interior_decorator/Raw_Obj_Data.h
+	Interior_decorator/Raw_Obj_Data.cpp
 	common/shader.cpp
 	common/shader.hpp
 	common/controls.cpp
