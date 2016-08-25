@@ -1,6 +1,7 @@
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 // Include GLEW
 #include <GL/glew.h>
@@ -11,10 +12,21 @@ GLFWwindow* window;
 
 // Include GLM
 #include <glm/glm.hpp>
+
+//Include custom libraries
+#include "file_loader.h"
+
+
 using namespace glm;
+
+
+
+
 
 int main( void )
 {
+
+	
 	// Initialise GLFW
 	if( !glfwInit() )
 	{
@@ -70,7 +82,7 @@ int main( void )
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
-
+	
 	return 0;
 }
 
