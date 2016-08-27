@@ -86,8 +86,7 @@ short FileLoader::Save(const std::string path)
 
 short FileLoader::Save()
 {
-	//TODO
-	return 0;
+	return Save(DefaultPath);
 }
 
 void FileLoader::SetPath(const std::string path)
