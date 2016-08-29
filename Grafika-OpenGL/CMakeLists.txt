@@ -63,6 +63,8 @@ add_executable(Interior_decorator
 	Interior_decorator/file_loader.cpp
 	Interior_decorator/Raw_Obj_Data.h
 	Interior_decorator/Raw_Obj_Data.cpp
+	Interior_decorator/Display.h
+	Interior_decorator/Display.cpp
 	common/shader.cpp
 	common/shader.hpp
 	common/controls.cpp

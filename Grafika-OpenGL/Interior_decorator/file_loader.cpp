@@ -4,7 +4,7 @@
 	0 = succes.
 	1 = eof(), safely loaded whole file
    -1 = error occured */
-short FileLoader::LoadNextObject()
+int FileLoader::LoadNextObject()
 {
 	if (file.is_open()) {
 		std::string ObjFilePath;
@@ -52,7 +52,7 @@ short FileLoader::LoadNextObject()
 FileLoader::FileLoader(std::string path): DefaultPath(path)
 {}
 
-short FileLoader::Load(const std::string path)
+int FileLoader::Load(const std::string path)
 {
 	std::ifstream DoesFileExist(path);
 	if (DoesFileExist.fail()) {
@@ -73,18 +73,18 @@ short FileLoader::Load(const std::string path)
 	return 0;
 }
 
-short FileLoader::Load()
+int FileLoader::Load()
 {
 	return Load(DefaultPath);
 }
 
-short FileLoader::Save(const std::string path)
+int FileLoader::Save(const std::string path)
 {
 	//TODO
 	return 0;
 }
 
-short FileLoader::Save()
+int FileLoader::Save()
 {
 	return Save(DefaultPath);
 }

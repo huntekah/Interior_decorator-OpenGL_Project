@@ -7,7 +7,7 @@ class FileLoader {
 	private:
 		std::string DefaultPath;
 		std::fstream file;
-		short LoadNextObject();
+		int LoadNextObject();
 
 	public:
 
@@ -21,10 +21,10 @@ class FileLoader {
 			0 - success
 		   -1 bad data format
 		   -2 file does not exist */
-		short Load(const std::string path);
-		short Load();
-		short Save(const std::string path); // TODO
-		short Save(); // TODO
+		int Load(const std::string path);
+		int Load();
+		int Save(const std::string path); // TODO
+		int Save(); // TODO
 		void SetPath(const std::string path);
 		void Clear();
 		RawObjData& get(unsigned id);
