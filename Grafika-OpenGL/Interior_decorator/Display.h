@@ -12,6 +12,8 @@
 
 #include <vector>
 #include "common/shader.hpp"
+#include "common/objloader.hpp"
+#include "common/vboindexer.hpp"
 
 class Display : protected FileLoader{
 private:
@@ -61,6 +63,7 @@ private:
 	void InitializeShaders();
 	bool isNewShader( int );
 	int getSimilarShaders(int);
+	void LoadOpenGLObjects();
 
 public:
 	Display(std::string, GLFWwindow*const&);

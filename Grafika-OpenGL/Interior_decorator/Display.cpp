@@ -1,4 +1,4 @@
-#include "Display.h"
+﻿#include "Display.h"
 
 void Display::InitializeVertexArray()
 {
@@ -40,15 +40,23 @@ int Display::getSimilarShaders(int objID)
 	return -1; //cause it shouldnt happen;
 }
 
+void Display::LoadOpenGLObjects()
+{
+	for (unsigned int i = 0; i < data.size(); i++) { /*TOCHANGE IMPORTANT*/ // funkcja ssie, trzeba loadOBJ i indexVBO przepisać na wersję przyjmującą vector<vector<glm::vec3>>
+		///PUSH BACK SOME OBJECTS FOR THE VECTORS.
+		if (false == loadOBJ(data[i].ObjFilePath.c_str(), vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE); /*TOCHANGE*/
+		indexVBO(vertices[i], uvs[i], normals[i], indices[i], indexedVertices[i], indexedUvs[i], indexedNormals[i]); /*TOCHANGE*/
+	}
+}
 
 Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path) , window(_window)
 {
 	//Inicialization
-	if (FileLoader::Load() != 0) exit(EXIT_FAILURE); // PRZEROBIC NA TRY - CATCH exception
+	if (FileLoader::Load() != 0) exit(EXIT_FAILURE); // /*TOCHANGE*/PRZEROBIC NA TRY - CATCH exception
 	
 	InitializeVertexArray();
 	InitializeShaders();
-	
+	LoadOpenGLObjects();
 }
 
 bool Display::Draw()
