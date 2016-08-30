@@ -3,7 +3,7 @@ Można przypisać się do konkretnej pracy, żeby druga osoba wiedziała nad czy
 
 Interior_decorator.cpp
 
-Display   <--->  Krzyś
+klasa Display   <--->  Krzyś
 
 file_loader -> Save()
 
@@ -30,3 +30,5 @@ Common/vboindexer -> przepisać od nowa
 Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu - musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu.
 
 napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów (o ile tak się da xD)
+
+zmienić CMakelists tak, aby była w pełni zrozumiała, tylko i wyłącznie nasza.
