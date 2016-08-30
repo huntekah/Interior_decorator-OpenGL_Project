@@ -1,13 +1,32 @@
 roboczy plik w którym na bieżąco uaktualniane są informacje, gdzie i nad czym można pracować.
+Można przypisać się do konkretnej pracy, żeby druga osoba wiedziała nad czym pracuje pierwsza :)
 
 Interior_decorator.cpp
 
-Display 
+Display   <--->  Krzyś
 
 file_loader -> Save()
 
-Common/shader -> przepisać od nowa
-Common/ -> przepisać od nowa
-Common/ -> przepisać od nowa
-Common/ -> przepisać od nowa
-Common/ -> przepisać od nowa
+
+Common/shader -> przepisać od nowa  {
+              przepisać funkcję LoadShaders() i w przypadku gdyby miała przyjmować inne argumenty,
+              zamienić w pozostałych klasach sposób jej wykonania.
+                                    }
+Common/constrols -> przepisać od nowa {
+              po przepisaniu można opcjonalnie dodać:
+              * zamienić funkcję na klasę obsługującą proces chodzenia
+              ** chodzenie zamiast latania 
+              ** wykrywanie ścian (każdy obiekt musiałby mieć trzy nowe atrybuty w RawObjData opisujące rozmiar boxu obiektu
+              ew. dwa rozmiary by tylko opisać obwód "z lotu ptaka"
+              ***** skakanie (wiem, mam bujną wyobraźnię ^^)
+}
+Common/objloader -> przepisać od nowa
+~Common/quaternion_utils -> przepisać od nowa
+~Common/transgentspace -> przepisać od nowa
+~Common/text2D -> przepisać od nowa
+Common/texture -> przepisać od nowa
+Common/vboindexer -> przepisać od nowa
+
+Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu - musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu.
+
+napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów (o ile tak się da xD)
