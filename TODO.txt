@@ -1,0 +1,13 @@
+roboczy plik w którym na bieżąco uaktualniane są informacje, gdzie i nad czym można pracować.
+
+Interior_decorator.cpp
+
+Display 
+
+file_loader -> Save()
+
+Common/shader -> przepisać od nowa
+Common/ -> przepisać od nowa
+Common/ -> przepisać od nowa
+Common/ -> przepisać od nowa
+Common/ -> przepisać od nowa
