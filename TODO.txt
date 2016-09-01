@@ -20,7 +20,7 @@ Common/constrols -> przepisać od nowa {
               ew. dwa rozmiary by tylko opisać obwód "z lotu ptaka"
               ***** skakanie (wiem, mam bujną wyobraźnię ^^)
 }
-Common/objloader -> przepisać od nowa
+Common/objloader -> przepisać od nowa <-----> Aga
 ~Common/quaternion_utils -> przepisać od nowa
 ~Common/transgentspace -> przepisać od nowa
 ~Common/text2D -> przepisać od nowa
