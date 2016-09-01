@@ -1,2 +1,1 @@
-ObjFilePath	ObjUVMapPath	FragmentShaderPath	VertexShaderPath	1.0	2.0	3.0	0.0	-1.0	-2.0	4.0	5.0	6.0
-ObjFilePath1	ObjUVMapPath1	FragmentShaderPath1	VertexShaderPath1	2.0	3.0	0.0	-1.0	-2.0	4.0	5.0	6.0	1.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	2.0	3.0	0.0	-1.0	-2.0	4.0	5.0	6.0
