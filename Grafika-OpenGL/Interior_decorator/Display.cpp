@@ -4,7 +4,7 @@ void Display::InitializeVertexArray()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		VertexArrayID.emplace_back(GLuint());
-		glGenVertexArrays(1, &VertexArrayID[i]);
+		glGenVertexArrays(i, &(VertexArrayID[i]));
 		glBindVertexArray(VertexArrayID[i]);
 	}
 }

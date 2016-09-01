@@ -53,6 +53,7 @@ int main( void )
 	glfwMakeContextCurrent(window);
 
 	// Initialize GLEW
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		getchar();
