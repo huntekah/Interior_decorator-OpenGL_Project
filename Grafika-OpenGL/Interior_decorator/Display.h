@@ -19,7 +19,7 @@
 #include "common/controls.hpp"
 
 class Display : protected FileLoader{
-public:
+private:
 	std::vector<GLuint> VertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many
 
@@ -76,7 +76,7 @@ public:
 
 	double deltaTime;
 	
-//public:
+public:
 	Display(std::string, GLFWwindow*const&);
 	~Display();
 	bool Draw();

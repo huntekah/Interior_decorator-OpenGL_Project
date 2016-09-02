@@ -179,7 +179,8 @@ bool Display::Draw()
 		glUniform3f(LightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
 		glUniformMatrix4fv(ViewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &ViewMatrix[0][0]);
 	
-		ModelMatrix[i] = glm::mat4(1.0);
+		ModelMatrix[i] = glm::mat4(1.0f);
+		ModelMatrix[i] = glm::scale(ModelMatrix[i], glm::vec3(data[i].ScaleX, data[i].ScaleY, data[i].ScaleZ));
 		ModelMatrix[i] = glm::translate(ModelMatrix[i], glm::vec3(data[i].x, data[i].y, data[i].z));
 		MVP[i] = ProjectionMatrix * ViewMatrix * ModelMatrix[i]; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
 	
