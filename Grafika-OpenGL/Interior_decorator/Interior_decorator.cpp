@@ -43,7 +43,7 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( width, height, "Tutorial 01", NULL, NULL);
+	window = glfwCreateWindow( width, height, "Interior Decorator", NULL, NULL);
 	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
@@ -93,6 +93,7 @@ int main( void )
 
 		// Swap buffers
 		///glfwSwapBuffers(window);
+		//glClearColor(0.0f, 1.0f, 0.4f, 0.0f);
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed

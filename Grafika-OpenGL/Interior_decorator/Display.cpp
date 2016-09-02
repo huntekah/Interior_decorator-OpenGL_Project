@@ -4,7 +4,7 @@ void Display::InitializeVertexArray()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		VertexArrayID.emplace_back(GLuint());
-		glGenVertexArrays(i, &(VertexArrayID[i]));
+		glGenVertexArrays(1, &(VertexArrayID[i])); 
 		glBindVertexArray(VertexArrayID[i]);
 	}
 }
@@ -233,20 +233,20 @@ bool Display::Draw()
 		// Draw the triangles !
 		glDrawElements(
 			GL_TRIANGLES,      // mode
-			indices.size(),    // count
+			indices[i].size(),    // count
 			GL_UNSIGNED_SHORT,   // type
 			(void*)0           // element array buffer offset
 		);
 
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
 
-		// Swap buffers
-		glfwSwapBuffers(window);
-		//glfwPollEvents();
 	}
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 
+	// Swap buffers
+	glfwSwapBuffers(window);
+	//glfwPollEvents();
 
 	return false;
 }
