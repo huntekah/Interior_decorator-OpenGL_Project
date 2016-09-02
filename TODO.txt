@@ -4,7 +4,7 @@ Można przypisać się do konkretnej pracy, żeby druga osoba wiedziała nad czy
 Interior_decorator.cpp
 
 klasa Display   <--->  Krzyś
-
+    +funkcja wczytująca osobno budynek i rysująca go. 
 file_loader -> Save()
 
 
