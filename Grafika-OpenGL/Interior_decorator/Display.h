@@ -9,14 +9,17 @@
 
 // Include GLM
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
 #include "common/shader.hpp"
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
+#include "common/texture.hpp"
+#include "common/controls.hpp"
 
 class Display : protected FileLoader{
-private:
+public:
 	std::vector<GLuint> VertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many
 
@@ -51,24 +54,33 @@ private:
 	
 	glm::vec3 lightPos;
 
-	std::vector<glm::mat4> ModelMatrix;
-	std::vector<glm::mat4> MVP;
+	std::vector<glm::mat4> ModelMatrix;	// 1 .. 1
+	std::vector<glm::mat4> MVP;			// 1 .. 1
 
 	/* corelation between porgramID and specific Object;
 	(since two or more objects can have the same programID) */
-	std::vector<std::pair<int,int>> ObjToProgramID;	//binds object with ProgramID (shaders)
+	std::vector<int> ObjToProgramID;	//binds object with ProgramID (shaders) first - obj id, second - program id
 	GLFWwindow *const&window;
 
 	void InitializeVertexArray();
 	void InitializeShaders();
 	bool isNewShader( int );
 	int getSimilarShaders(int);
+	void GetHandleMVP();
+	void LoadTextures();
 	void LoadOpenGLObjects();
+	void LoadIntoVBO();
+	void InitializeTime(); //inicializes lastTime and DeltaTime Variables.
+	void SetDeltaTime();	// updates deltaTime Variable with a time between last call of this function
+	void InitializeDrawObjects();
 
-public:
+	double deltaTime;
+	
+//public:
 	Display(std::string, GLFWwindow*const&);
+	~Display();
 	bool Draw();
-
+	
 	
 
 };

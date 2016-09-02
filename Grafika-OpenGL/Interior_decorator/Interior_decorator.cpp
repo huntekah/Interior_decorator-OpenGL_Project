@@ -16,7 +16,7 @@ GLFWwindow* window;
 //Include custom libraries
 #include "file_loader.h"
 #include "common/shader.hpp"
-
+#include "Display.h"
 using namespace glm;
 
 
@@ -43,7 +43,7 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( width, height, "Tutorial 01", NULL, NULL);
+	window = glfwCreateWindow( width, height, "Interior Decorator", NULL, NULL);
 	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
@@ -53,6 +53,7 @@ int main( void )
 	glfwMakeContextCurrent(window);
 
 	// Initialize GLEW
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		getchar();
@@ -80,17 +81,19 @@ int main( void )
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
 
-
-
+	Display Scene("test.txt", window);
+	
 	do{
 		// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
-		glClear( GL_COLOR_BUFFER_BIT );
+		///glClear( GL_COLOR_BUFFER_BIT );
 
 		// Draw nothing, see you in tutorial 2 !
 
-		
+		Scene.Draw();
+
 		// Swap buffers
-		glfwSwapBuffers(window);
+		///glfwSwapBuffers(window);
+		//glClearColor(0.0f, 1.0f, 0.4f, 0.0f);
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
