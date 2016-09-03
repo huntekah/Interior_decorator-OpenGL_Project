@@ -4,7 +4,7 @@ Można przypisać się do konkretnej pracy, żeby druga osoba wiedziała nad czy
 Interior_decorator.cpp
 
 klasa Display   <--->  Krzyś
-    +funkcja wczytująca osobno budynek i rysująca go. 
+    +funkcja wczytująca osobno budynek(pomieszczenie) i rysująca go. 
 file_loader -> Save()
 
 
@@ -21,13 +21,14 @@ Common/constrols -> przepisać od nowa {
               ***** skakanie (wiem, mam bujną wyobraźnię ^^)
 }
 Common/objloader -> przepisać od nowa <-----> Aga
-~Common/quaternion_utils -> przepisać od nowa
-~Common/transgentspace -> przepisać od nowa
-~Common/text2D -> przepisać od nowa
+~ Opcjonalne:
+~ Common/quaternion_utils -> przepisać od nowa
+~ Common/transgentspace -> przepisać od nowa
+~ Common/text2D -> przepisać od nowa
 Common/texture -> przepisać od nowa
 Common/vboindexer -> przepisać od nowa
 
-Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu - musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu.
+Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu - musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu. <-----> Krzyś
 
 napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów (o ile tak się da xD)
 
