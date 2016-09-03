@@ -10,6 +10,8 @@
 // Include GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include <vector>
 #include "common/shader.hpp"
@@ -20,15 +22,15 @@
 
 class Display : protected FileLoader{
 private:
-	std::vector<GLuint> VertexArrayID;	// 1 .. 1
+	std::vector<GLuint> vertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many
 
-	std::vector<GLuint> MatrixID;		// 1 .. many
-	std::vector<GLuint> ViewMatrixID;	// 1 .. many
-	std::vector<GLuint> ModelMatrixID;	// 1 .. many
+	std::vector<GLuint> matrixID;		// 1 .. many
+	std::vector<GLuint> viewMatrixID;	// 1 .. many
+	std::vector<GLuint> modelMatrixID;	// 1 .. many
 	
-	std::vector<GLuint> Texture;		// 1 .. 1
-	std::vector<GLuint> TextureID;		// 1 .. 1
+	std::vector<GLuint> texture;		// 1 .. 1
+	std::vector<GLuint> textureID;		// 1 .. 1
 	
 	std::vector<std::vector<glm::vec3>> vertices;	// 1 .. 1
 	std::vector<std::vector<glm::vec2>> uvs;		// 1 .. 1
@@ -44,17 +46,17 @@ private:
 	std::vector<GLuint> normalBuffer;	// 1 .. 1
 	std::vector<GLuint> elementBuffer;	// 1 .. 1
 
-	std::vector<GLuint> LightID;		// 1 .. many
+	std::vector<GLuint> lightID;		// 1 .. many
 	
 	double lastTime;
 
 	//inicialised not to inicialise them in each draw loop;
-	glm::mat4 ProjectionMatrix;
-	glm::mat4 ViewMatrix;
+	glm::mat4 projectionMatrix;
+	glm::mat4 viewMatrix;
 	
 	glm::vec3 lightPos;
 
-	std::vector<glm::mat4> ModelMatrix;	// 1 .. 1
+	std::vector<glm::mat4> modelMatrix;	// 1 .. 1
 	std::vector<glm::mat4> MVP;			// 1 .. 1
 
 	/* corelation between porgramID and specific Object;
@@ -64,8 +66,8 @@ private:
 
 	void InitializeVertexArray();
 	void InitializeShaders();
-	bool isNewShader( int );
-	int getSimilarShaders(int);
+	bool IsNewShader( int );
+	int GetSimilarShaders( int );
 	void GetHandleMVP();
 	void LoadTextures();
 	void LoadOpenGLObjects();
@@ -80,7 +82,12 @@ public:
 	Display(std::string, GLFWwindow*const&);
 	~Display();
 	bool Draw();
-	
+	void Translate(int id, double x, double y, double z);
+	void Translate(int id, glm::vec3 translation);
+	void Scale(int id, double x, double y, double z);
+	void Scale(int id, glm::vec3 scale);
+	void Rotate(int id, glm::quat rotation);
+	void Rotate(int id, double yaw, double pitch, double roll);
 	
 
 };

@@ -12,7 +12,7 @@ int FileLoader::LoadNextObject()
 		std::string FragmentShaderPath;
 		std::string VertexShaderPath;
 		double x, y, z;
-		double RotationX, RotationY, RotationZ;
+		double quatW, quatX, quatY, quatZ;
 		double ScaleX, ScaleY, ScaleZ;
 
 		//stworzyc nowy obiekt daty, do którego wczytam a pózniej pushnac do vectora.
@@ -27,9 +27,10 @@ int FileLoader::LoadNextObject()
 		file >> x;
 		file >> y;
 		file >> z;
-		file >> RotationX;
-		file >> RotationY;
-		file >> RotationZ;
+		file >> quatW;
+		file >> quatX;
+		file >> quatY;
+		file >> quatZ;
 		file >> ScaleX;
 		file >> ScaleY;
 		file >> ScaleZ;
@@ -41,7 +42,7 @@ int FileLoader::LoadNextObject()
 		data.emplace_back(ObjFilePath, ObjUVMapPath,
 			FragmentShaderPath, VertexShaderPath,
 			data.size(), x, y, z,
-			RotationX, RotationY, RotationZ,
+			quatW, quatX, quatY, quatZ,
 			ScaleX, ScaleY, ScaleZ);
 
 		return 0;
@@ -112,7 +113,7 @@ FileLoader::~FileLoader()
 
 std::ostream & operator<<(std::ostream & screen, FileLoader & File)
 {
-	for (int i = 0; i < File.data.size(); i++) {
+	for (unsigned int i = 0; i < File.data.size(); i++) {
 		screen << File.data[i] << std::endl;
 	}
 	return screen;

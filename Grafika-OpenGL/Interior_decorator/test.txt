@@ -1,3 +1,5 @@
-suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	2.0	3.0	0.0	-1.0	-2.0	1.0	1.0	1.0
-suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	0.0	0.0	0.0	-1.0	-2.0	2.0	2.0	2.0
-suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	0.0	1.70	0.0	0.0	-1.0	-2.0	4.0	1.0	1.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	2.0	3.0	0.0	-1.0	-2.0	0.43	1.0	1.0	1.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	0.0	0.0	1.0	0.0	0.0	7.0	2.0	2.0	2.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	0.0	1.70	0.0	3.0	0.0	0.0	0.23	0.1	0.1	0.12
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	5.0	0.0	0.0	0.0	0.0	0.0	90.0	2.0	2.0	2.0
+

@@ -87,8 +87,9 @@ int main( void )
 		// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
 		///glClear( GL_COLOR_BUFFER_BIT );
 
-		// Draw nothing, see you in tutorial 2 !
-
+		Scene.Rotate(1,0.001f,0.0f,0.0f);
+		Scene.Translate(0, 0, 0, 0.0007);
+		Scene.Scale(2, 1.0003, 1.0003, 1.0003);
 		Scene.Draw();
 
 		// Swap buffers

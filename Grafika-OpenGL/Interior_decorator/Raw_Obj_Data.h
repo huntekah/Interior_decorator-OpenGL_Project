@@ -1,26 +1,32 @@
 ﻿#pragma once
 #include <string>
 #include <iostream>
+#include <math.h>
+#include <glm/gtx/quaternion.hpp>
 class RawObjData {
 	public:
 
 		//constructor
 		RawObjData(	std::string, std::string, std::string, std::string,
 					int = 0, double = 0.0f, double = 0.0f, double = 0.0f,
-					double = 0.0f, double = 0.0f, double = 0.0f,
+					double = 1.0f, double = 0.0f, double = 0.0f, double = 0.0f,
 					double = 1.0f, double = 1.0f, double = 1.0f);
-
+		RawObjData(std::string, std::string, std::string, std::string,
+			int = 0, double = 0.0f, double = 0.0f, double = 0.0f,
+			glm::quat = glm::quat(1.0f,0.0f,0.0f,0.0f),
+			double = 1.0f, double = 1.0f, double = 1.0f);
 		//copy constructor
 		RawObjData(const RawObjData& example);
-
+		void NormalizeRotation();
 		int id;
 		double x, y, z;
-		double RotationX, RotationY, RotationZ;
-		double ScaleX, ScaleY, ScaleZ;
-		const std::string ObjFilePath;
-		const std::string ObjUVMapPath;
-		const std::string FragmentShaderPath;
-		const std::string VertexShaderPath;
+	//	double quatW, quatX, quatY, quatZ;
+		glm::quat rotation;
+		double scaleX, scaleY, scaleZ;
+		const std::string objFilePath;
+		const std::string objUVMapPath;
+		const std::string fragmentShaderPath;
+		const std::string vertexShaderPath;
 
 		
 };

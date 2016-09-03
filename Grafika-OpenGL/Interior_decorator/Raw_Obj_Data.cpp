@@ -1,32 +1,58 @@
 #include "Raw_Obj_Data.h"
 
-RawObjData::RawObjData(	std::string ObjFilePath_, std::string ObjUVMapPath_,
-						std::string FragmentShaderPath_, std::string VertexShaderPath_,
+RawObjData::RawObjData(	std::string objFilePath_, std::string objUVMapPath_,
+						std::string fragmentShaderPath_, std::string vertexShaderPath_,
 						int id_, double x_, double y_, double z_, 
-						double RotationX_, double RotationY_, double RotationZ_,
-						double ScaleX_, double ScaleY_, double ScaleZ_ ):
-	ObjFilePath(ObjFilePath_), ObjUVMapPath(ObjUVMapPath_),
-	FragmentShaderPath(FragmentShaderPath_), VertexShaderPath(VertexShaderPath_),
+						double quatW_, double quatX_, double quatY_, double quatZ_,
+						double scaleX_, double scaleY_, double scaleZ_ ):
+	objFilePath(objFilePath_), objUVMapPath(objUVMapPath_),
+	fragmentShaderPath(fragmentShaderPath_), vertexShaderPath(vertexShaderPath_),
 	id(id_), x(x_), y(y_), z(z_),
-	RotationX(RotationX_), RotationY(RotationY_), RotationZ(RotationZ_),
-	ScaleX(ScaleX_), ScaleY(ScaleY_), ScaleZ(ScaleZ_)
-{}
+	scaleX(scaleX_), scaleY(scaleY_), scaleZ(scaleZ_)
+{
+	rotation = glm::quat(quatW_, quatX_, quatY_, quatZ_);
+	NormalizeRotation();
+	/*double l = std::sqrt(quatW*quatW + quatX*quatX + quatY*quatY + quatZ*quatZ);
+	quatW /= l;
+	quatX /= l;
+	quatY /= l;
+	quatZ /= l;*/
+}
+
+RawObjData::RawObjData(	std::string objFilePath_, std::string objUVMapPath_,
+						std::string fragmentShaderPath_, std::string vertexShaderPath_,
+						int id_, double x_, double y_, double z_,
+						glm::quat rotation_,
+						double scaleX_, double scaleY_, double scaleZ_) :
+	objFilePath(objFilePath_), objUVMapPath(objUVMapPath_),
+	fragmentShaderPath(fragmentShaderPath_), vertexShaderPath(vertexShaderPath_),
+	id(id_), x(x_), y(y_), z(z_),
+	rotation(rotation_),
+	scaleX(scaleX_), scaleY(scaleY_), scaleZ(scaleZ_)
+{
+	NormalizeRotation();
+}
 
 RawObjData::RawObjData(const RawObjData & example):
 	id(example.id), x(example.x), y(example.y), z(example.z),
-	RotationX(example.RotationX), RotationY(example.RotationY), RotationZ(example.RotationZ),
-	ScaleX(example.ScaleX), ScaleY(example.ScaleY), ScaleZ(example.ScaleZ),
-	ObjFilePath(example.ObjFilePath), ObjUVMapPath(example.ObjUVMapPath), 
-	FragmentShaderPath(example.FragmentShaderPath), VertexShaderPath(example.VertexShaderPath)
+	rotation(example.rotation),
+	scaleX(example.scaleX), scaleY(example.scaleY), scaleZ(example.scaleZ),
+	objFilePath(example.objFilePath), objUVMapPath(example.objUVMapPath), 
+	fragmentShaderPath(example.fragmentShaderPath), vertexShaderPath(example.vertexShaderPath)
 {}
 
+void RawObjData::NormalizeRotation()
+{
+	rotation = glm::normalize(rotation);
+}
+
 std::ostream & operator<<(std::ostream &screen, RawObjData &Obj) {
-	screen << "Object: \t\t" << Obj.ObjFilePath << "\n";
+	screen << "Object: \t\t" << Obj.objFilePath << "\n";
 	screen << "Position =\t\t( " << Obj.x << ", " << Obj.y << ", " << Obj.z << " )\n";
-	screen << "Rotation =\t\t( " << Obj.RotationX << ", " << Obj.RotationY << ", " << Obj.RotationZ << " )\n";
-	screen << "Scale = \t\t( " << Obj.ScaleX << ", " << Obj.ScaleY << ", " << Obj.ScaleZ << " )\n";
-	screen << "ObjUVMapPath:\t\t" << Obj.ObjUVMapPath << "\n";
-	screen << "FragmentShaderPath:\t" << Obj.FragmentShaderPath << "\n";
-	screen << "VertexShaderPath:\t" << Obj.VertexShaderPath << "\n";
+	screen << "Rotation =\t\t( " << Obj.rotation.w << ", " << Obj.rotation.x << ", " << Obj.rotation.y << ", "<<Obj.rotation.z <<" )\n";
+	screen << "Scale = \t\t( " << Obj.scaleX << ", " << Obj.scaleY << ", " << Obj.scaleZ << " )\n";
+	screen << "objUVMapPath:\t\t" << Obj.objUVMapPath << "\n";
+	screen << "fragmentShaderPath:\t" << Obj.fragmentShaderPath << "\n";
+	screen << "vertexShaderPath:\t" << Obj.vertexShaderPath << "\n";
 	return screen;
 }
