@@ -8,7 +8,7 @@ klasa Display   <--->  Krzyś
 file_loader -> Save()
 
 
-Common/shader -> przepisać od nowa  {
+Common/shader -> przepisać od nowa  {``<-----> Krzyś
               przepisać funkcję LoadShaders() i w przypadku gdyby miała przyjmować inne argumenty,
               zamienić w pozostałych klasach sposób jej wykonania.
                                     }
@@ -28,7 +28,8 @@ Common/objloader -> przepisać od nowa <-----> Aga
 Common/texture -> przepisać od nowa
 Common/vboindexer -> przepisać od nowa
 
-Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu - musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu. <-----> Krzyś
+Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu 
+- musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu. 
 
 napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów (o ile tak się da xD)
 
