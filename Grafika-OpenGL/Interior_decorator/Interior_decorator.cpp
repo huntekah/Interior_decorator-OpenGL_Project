@@ -87,9 +87,27 @@ int main( void )
 		// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
 		///glClear( GL_COLOR_BUFFER_BIT );
 
-		Scene.Rotate(1,0.001f,0.0f,0.0f);
-		Scene.Translate(0, 0, 0, 0.0007);
-		Scene.Scale(2, 1.0003, 1.0003, 1.0003);
+		//Scene.Rotate(1,0.001f,0.0f,0.0f);
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+			Scene.Translate(0, 0.0, 0.007, 0.00);
+		}
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+			Scene.Translate(0, 0.0, -0.007, -0.00);
+		}
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+			Scene.Rotate(0, 0.001f, 0.0f, 0.0f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+			Scene.Rotate(0, -0.001f, 0.0f, 0.0f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+			Scene.Scale(0, 1.001f, 1.001f, 1.001f);
+		}
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+			Scene.Scale(0, 0.999f, 0.999f, 0.999f);
+		}
+		//Scene.Translate(2, 0, 0.0007, 0.000);
+		//Scene.Scale(2, 1.0003, 1.0003, 1.0003);
 		Scene.Draw();
 
 		// Swap buffers
@@ -100,7 +118,7 @@ int main( void )
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
 		   glfwWindowShouldClose(window) == 0 );
-
+	Scene.Save();
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 	

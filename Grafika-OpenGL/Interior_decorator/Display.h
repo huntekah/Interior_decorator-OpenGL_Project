@@ -56,7 +56,7 @@ private:
 	
 	glm::vec3 lightPos;
 
-	std::vector<glm::mat4> modelMatrix;	// 1 .. 1
+	//std::vector<glm::mat4> modelMatrix;	// 1 .. 1
 	std::vector<glm::mat4> MVP;			// 1 .. 1
 
 	/* corelation between porgramID and specific Object;
@@ -73,7 +73,7 @@ private:
 	void LoadOpenGLObjects();
 	void LoadIntoVBO();
 	void InitializeTime(); //inicializes lastTime and DeltaTime Variables.
-	void SetDeltaTime();	// updates deltaTime Variable with a time between last call of this function
+	double SetDeltaTime();	// updates deltaTime Variable with a time between last call of this function
 	void InitializeDrawObjects();
 
 	double deltaTime;
@@ -82,6 +82,7 @@ public:
 	Display(std::string, GLFWwindow*const&);
 	~Display();
 	bool Draw();
+	void Save();
 	void Translate(int id, double x, double y, double z);
 	void Translate(int id, glm::vec3 translation);
 	void Scale(int id, double x, double y, double z);

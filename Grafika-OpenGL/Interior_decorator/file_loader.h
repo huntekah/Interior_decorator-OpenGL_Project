@@ -8,6 +8,7 @@ class FileLoader {
 		std::string DefaultPath;
 		std::fstream file;
 		int LoadNextObject();
+		int SaveObject(int id);
 
 	public:
 
@@ -24,7 +25,7 @@ class FileLoader {
 		int Load(const std::string path);
 		int Load();
 		int Save(const std::string path); // TODO
-		int Save(); // TODO
+		int Save(); 
 		void SetPath(const std::string path);
 		void Clear();
 		RawObjData& get(unsigned id);
@@ -34,3 +35,15 @@ class FileLoader {
 
 //used to show all objects;
 std::ostream & operator<<(std::ostream &screen, FileLoader &FileData);
+//used for saving and loading to file
+std::fstream & operator>>(std::fstream &screen, glm::mat4 &modelMatrix);
+std::fstream & operator<<(std::fstream &screen, glm::mat4 &modelMatrix);
+
+
+/*
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	2.0	3.0	0.0	-1.0	-2.0	0.43	1.0	1.0	1.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	1.0	0.0	0.0	1.0	0.0	0.0	7.0	2.0	2.0	2.0
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	0.0	1.70	0.0	3.0	0.0	0.0	0.23	0.1	0.1	0.12
+suzanne.obj	uvmap.DDS	FragmentShader.frag	VertexShader.vert	5.0	0.0	0.0	0.0	0.0	0.0	90.0	2.0	2.0	2.0
+
+*/

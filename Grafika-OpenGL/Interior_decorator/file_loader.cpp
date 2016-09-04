@@ -11,11 +11,8 @@ int FileLoader::LoadNextObject()
 		std::string ObjUVMapPath;
 		std::string FragmentShaderPath;
 		std::string VertexShaderPath;
-		double x, y, z;
-		double quatW, quatX, quatY, quatZ;
-		double ScaleX, ScaleY, ScaleZ;
+		glm::mat4 modelMatrix;
 
-		//stworzyc nowy obiekt daty, do którego wczytam a pózniej pushnac do vectora.
 		//file.good checks if there are no errors and it is not EOF, so I can safely read more data;
 		if (!file.good()) return -1;
 		
@@ -24,8 +21,8 @@ int FileLoader::LoadNextObject()
 		file >> ObjUVMapPath;
 		file >> FragmentShaderPath;
 		file >> VertexShaderPath;
-		file >> x;
-		file >> y;
+		file >> modelMatrix;
+		/*file >> y;
 		file >> z;
 		file >> quatW;
 		file >> quatX;
@@ -33,7 +30,7 @@ int FileLoader::LoadNextObject()
 		file >> quatZ;
 		file >> ScaleX;
 		file >> ScaleY;
-		file >> ScaleZ;
+		file >> ScaleZ;*/
 
 		/*	Either no characters were extracted, or the characters extracted
 		could not be interpreted as a valid value of the appropriate type.*/
@@ -41,9 +38,39 @@ int FileLoader::LoadNextObject()
 
 		data.emplace_back(ObjFilePath, ObjUVMapPath,
 			FragmentShaderPath, VertexShaderPath,
-			data.size(), x, y, z,
-			quatW, quatX, quatY, quatZ,
-			ScaleX, ScaleY, ScaleZ);
+			data.size(), modelMatrix);
+
+		return 0;
+	}
+	else return -1;
+}
+
+/* SaveObject returns:
+0 = succes.
+-1 = error occured */
+int FileLoader::SaveObject(int id)
+{
+	if (file.is_open()) {
+		if (!file.good()) return -1;
+		file << data[id].objFilePath<<"\t";
+		file << data[id].objUVMapPath << "\t";
+		file << data[id].fragmentShaderPath << "\t";
+		file << data[id].vertexShaderPath << "\n";
+		file << data[id].modelMatrix;
+		/*file << data[id].x << "\t";
+		file << data[id].y << "\t";
+		file << data[id].z << "\t";
+		file << data[id].rotation.w << "\t";
+		file << data[id].rotation.x << "\t";
+		file << data[id].rotation.y << "\t";
+		file << data[id].rotation.z << "\t";
+		file << data[id].scaleX << "\t";
+		file << data[id].scaleY << "\t";
+		file << data[id].scaleZ << "\n";*/
+
+		/*Some errors occured duh*/
+		if (!file.good()) return -1;
+		if (file.fail())return -1;
 
 		return 0;
 	}
@@ -67,7 +94,7 @@ int FileLoader::Load(const std::string path)
 	int result = 0;
 	while(!file.eof()){
 		result = LoadNextObject();
-		if (result == -1) return -1;	//not enogh variables  
+		if (result == -1) return -1;	//not enough variables  
 	}
 	this->file.close();
 	this->file.clear();
@@ -81,7 +108,16 @@ int FileLoader::Load()
 
 int FileLoader::Save(const std::string path)
 {
-	//TODO
+	if (this->file.is_open()) this->file.close();
+	file.open(path , std::fstream::trunc | std::fstream::out);
+
+	for (int i = 0; i < data.size(); i++) {
+		if (SaveObject(i) == -1) return -1;	//saving i'th object
+	}
+
+	this->file.close();
+	this->file.clear();
+
 	return 0;
 }
 
@@ -116,5 +152,23 @@ std::ostream & operator<<(std::ostream & screen, FileLoader & File)
 	for (unsigned int i = 0; i < File.data.size(); i++) {
 		screen << File.data[i] << std::endl;
 	}
+	return screen;
+}
+
+std::fstream & operator>>(std::fstream & screen, glm::mat4 & modelMatrix)
+{
+	screen >> modelMatrix[0][0] >> modelMatrix[0][1] >> modelMatrix[0][2] >> modelMatrix[0][3];
+	screen >> modelMatrix[1][0] >> modelMatrix[1][1] >> modelMatrix[1][2] >> modelMatrix[1][3];
+	screen >> modelMatrix[2][0] >> modelMatrix[2][1] >> modelMatrix[2][2] >> modelMatrix[2][3];
+	screen >> modelMatrix[3][0] >> modelMatrix[3][1] >> modelMatrix[3][2] >> modelMatrix[3][3];
+	return screen;
+}
+
+std::fstream & operator<<(std::fstream & screen, glm::mat4 & modelMatrix)
+{
+	screen << modelMatrix[0][0] << "\t" << modelMatrix[0][1] << "\t" << modelMatrix[0][2] << "\t" << modelMatrix[0][3] << "\n";
+	screen << modelMatrix[1][0] << "\t" << modelMatrix[1][1] << "\t" << modelMatrix[1][2] << "\t" << modelMatrix[1][3] << "\n";
+	screen << modelMatrix[2][0] << "\t" << modelMatrix[2][1] << "\t" << modelMatrix[2][2] << "\t" << modelMatrix[2][3] << "\n";
+	screen << modelMatrix[3][0] << "\t" << modelMatrix[3][1] << "\t" << modelMatrix[3][2] << "\t" << modelMatrix[3][3] << "\n";
 	return screen;
 }

@@ -110,21 +110,22 @@ void Display::InitializeTime()
 	lastTime = glfwGetTime();
 }
 
-void Display::SetDeltaTime()
+double Display::SetDeltaTime()
 {
 	deltaTime = glfwGetTime() - lastTime;
 	lastTime = glfwGetTime();
+	return deltaTime;
 }
 
 void Display::InitializeDrawObjects()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
-		modelMatrix.emplace_back(glm::mat4(1.0));
+		//modelMatrix.emplace_back(glm::mat4(1.0));
 		
 		/*Translations*/
-		modelMatrix[i] = glm::translate(modelMatrix[i], glm::vec3(data[i].x, data[i].y, data[i].z));
-		modelMatrix[i] = glm::scale(modelMatrix[i], glm::vec3(data[i].scaleX, data[i].scaleY, data[i].scaleZ));
-		modelMatrix[i] = modelMatrix[i] * glm::toMat4(glm::quat(data[i].rotation.w, data[i].rotation.x, data[i].rotation.y, data[i].rotation.z));
+		//modelMatrix[i] = glm::translate(modelMatrix[i], glm::vec3(data[i].x, data[i].y, data[i].z));	// translation
+		//modelMatrix[i] = glm::scale(modelMatrix[i], glm::vec3(data[i].scaleX, data[i].scaleY, data[i].scaleZ));	// scaling
+		//modelMatrix[i] = modelMatrix[i] * glm::toMat4(glm::quat(data[i].rotation.w, data[i].rotation.x, data[i].rotation.y, data[i].rotation.z));	// rotating
 	
 		MVP.emplace_back(glm::mat4());
 	}
@@ -185,10 +186,10 @@ bool Display::Draw()
 		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
 		glUniformMatrix4fv(viewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &viewMatrix[0][0]);
 		
-		MVP[i] = projectionMatrix * viewMatrix * modelMatrix[i]; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
+		MVP[i] = projectionMatrix * viewMatrix * data[i].modelMatrix; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
 	
 		glUniformMatrix4fv(matrixID[ObjToProgramID[i]], 1, GL_FALSE, &(MVP[i])[0][0]);
-		glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(modelMatrix[i])[0][0]);
+		glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(data[i].modelMatrix)[0][0]);
 	
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture[i]);
@@ -255,47 +256,41 @@ bool Display::Draw()
 	return false;
 }
 
+void Display::Save()
+{
+	this->FileLoader::Save();
+}
+
 void Display::Translate(int id, double x, double y, double z)
 {
-	modelMatrix[id] = glm::translate(modelMatrix[id], glm::vec3(x, y, z));
-	data[id].x += x;
-	data[id].y += y;
-	data[id].z += z;
+	data[id].modelMatrix = glm::translate(data[id].modelMatrix, glm::vec3(x, y, z));
 }
 
 void Display::Translate(int id, glm::vec3 translation)
 {
-	modelMatrix[id] = glm::translate(modelMatrix[id], translation);
-	data[id].x += translation.x;
-	data[id].y += translation.y;
-	data[id].z += translation.z;
+	data[id].modelMatrix = glm::translate(data[id].modelMatrix, translation);
 }
 
 void Display::Scale(int id, double x, double y, double z)
 {
-	modelMatrix[id] = glm::scale(modelMatrix[id], glm::vec3(x,y,z));
-	data[id].scaleX *= x;
-	data[id].scaleY *= y;
-	data[id].scaleZ *= z;
+	data[id].modelMatrix = glm::scale(data[id].modelMatrix, glm::vec3(x,y,z));
 }
 
 void Display::Scale(int id, glm::vec3 scale)
 {
-	modelMatrix[id] = glm::scale(modelMatrix[id], scale);
-	data[id].scaleX *= scale.x;
-	data[id].scaleY *= scale.y;
-	data[id].scaleZ *= scale.z;
+	data[id].modelMatrix = glm::scale(data[id].modelMatrix, scale);
+
 }
 
-void Display::Rotate(int id, glm::quat rotation)
+void Display::Rotate(int id, glm::quat rotation)	// quaternion rotation
 {
 	rotation = glm::normalize(rotation);
-	modelMatrix[id] = modelMatrix[id] * glm::toMat4(rotation);		
-	data[id].rotation = data[id].rotation * rotation;				
-	data[id].NormalizeRotation();
+	data[id].modelMatrix = data[id].modelMatrix * glm::toMat4(rotation);
+//	data[id].rotation = data[id].rotation * rotation;				
+
 }
 
-void Display::Rotate(int id, double yaw, double pitch, double roll)
+void Display::Rotate(int id, double yaw, double pitch, double roll) // radian rotation
 {
 	double c1, c2, c3, s1, s2, s3;
 	glm::quat rotation;
