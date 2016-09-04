@@ -19,8 +19,9 @@
 #include "common/vboindexer.hpp"
 #include "common/texture.hpp"
 #include "common/controls.hpp"
+#include "utilities/shader_loader.h"
 
-class Display : protected FileLoader{
+class Display : protected FileLoader, protected ShaderLoader{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many
@@ -66,8 +67,6 @@ private:
 
 	void InitializeVertexArray();
 	void InitializeShaders();
-	bool IsNewShader( int );
-	int GetSimilarShaders( int );
 	void GetHandleMVP();
 	void LoadTextures();
 	void LoadOpenGLObjects();

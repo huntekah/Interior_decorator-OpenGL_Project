@@ -90,11 +90,14 @@ int FileLoader::Load(const std::string path)
 
 	if (this->file.is_open()) this->file.close();
 	file.open(path);
-
+	
 	int result = 0;
-	while(!file.eof()){
+	while (!file.eof()) {
 		result = LoadNextObject();
-		if (result == -1) return -1;	//not enough variables  
+		if (result == -1) {
+			std::cout << "Error with file: " << path << "\n";
+			return -1;	//not enough variables  
+		}
 	}
 	this->file.close();
 	this->file.clear();
@@ -112,7 +115,10 @@ int FileLoader::Save(const std::string path)
 	file.open(path , std::fstream::trunc | std::fstream::out);
 
 	for (int i = 0; i < data.size(); i++) {
-		if (SaveObject(i) == -1) return -1;	//saving i'th object
+		if (SaveObject(i) == -1) {
+			std::cout << "Impossible to open " << path << ". Remember to put files in the right directory! \n";
+			return -1;	//saving i'th object
+		}
 	}
 
 	this->file.close();

@@ -14,5 +14,10 @@
 #include "Interior_decorator/Raw_Obj_Data.h"
 
 class ShaderLoader{
+private:
+	bool ShaderLoader::IsNewShader(int objID, std::vector<RawObjData>& data);
+	int ShaderLoader::GetSimilarShaders(int objID, std::vector<RawObjData>& data, std::vector<int>& ObjToProgramID);
+	//GLuint LoadNextShader;
+protected:
 	void LoadShaders(std::vector<RawObjData>& data, std::vector<GLuint>& programID, std::vector<int>& ObjToProgramID);
 };

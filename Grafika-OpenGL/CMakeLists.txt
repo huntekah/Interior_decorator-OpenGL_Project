@@ -67,8 +67,6 @@ add_executable(Interior_decorator
 	Interior_decorator/Display.cpp
 	utilities/shader_loader.cpp
 	utilities/shader_loader.h
-	common/shader.cpp
-	common/shader.hpp
 	common/controls.cpp
 	common/controls.hpp
 	common/texture.cpp

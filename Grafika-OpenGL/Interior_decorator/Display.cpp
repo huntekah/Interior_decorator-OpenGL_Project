@@ -11,34 +11,7 @@ void Display::InitializeVertexArray()
 
 void Display::InitializeShaders()
 {
-	//int pID = 0;
-	for (unsigned int i = 0; i < data.size(); i++) {
-		if (IsNewShader(i)) {
-			programID.push_back( LoadShaders(data[i].vertexShaderPath.c_str(),
-									data[i].fragmentShaderPath.c_str()));	/*TOCHANGE LoadShaders*/ //Compiles Fragment and Vertex Shaders
-			ObjToProgramID.push_back(programID.size() - 1);	// adds the connection, which ProgramID Object[i] uses
-		}
-		else {
-			ObjToProgramID.push_back(GetSimilarShaders(i) );
-		}
-	}
-}
-
-bool Display::IsNewShader( int objID)
-{
-	for (int i = 0; i < objID; i++)
-		if (data[i].fragmentShaderPath == data[objID].fragmentShaderPath) return false;
-		else if (data[i].vertexShaderPath == data[objID].vertexShaderPath) return false;
-	
-	return true;
-}
-
-int Display::GetSimilarShaders(int objID) // returns the index of the similar 
-{
-	for (int i = 0; i < objID; i++)
-		if (data[i].fragmentShaderPath == data[objID].fragmentShaderPath
-			&& data[i].vertexShaderPath == data[objID].vertexShaderPath) return ObjToProgramID[i];
-	return -1; //cause it shouldnt happen;
+	LoadShaders(data, programID, ObjToProgramID);
 }
 
 void Display::GetHandleMVP()
