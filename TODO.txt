@@ -5,14 +5,8 @@ Interior_decorator.cpp
 
 klasa Display   <--->  Krzyś
     +funkcja wczytująca osobno budynek(pomieszczenie) i rysująca go. 
-file_loader -> Save()
 
-
-Common/shader -> przepisać od nowa  {``<-----> Krzyś
-              przepisać funkcję LoadShaders() i w przypadku gdyby miała przyjmować inne argumenty,
-              zamienić w pozostałych klasach sposób jej wykonania.
-                                    }
-Common/constrols -> przepisać od nowa {
+Common/constrols -> przepisać od nowa { <-----> Krzyś
               po przepisaniu można opcjonalnie dodać:
               * zamienić funkcję na klasę obsługującą proces chodzenia
               ** chodzenie zamiast latania 
