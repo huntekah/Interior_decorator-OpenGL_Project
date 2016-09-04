@@ -65,6 +65,8 @@ add_executable(Interior_decorator
 	Interior_decorator/Raw_Obj_Data.cpp
 	Interior_decorator/Display.h
 	Interior_decorator/Display.cpp
+	utilities/shader_loader.cpp
+	utilities/shader_loader.h
 	common/shader.cpp
 	common/shader.hpp
 	common/controls.cpp
@@ -92,9 +94,10 @@ create_target_launcher(Interior_decorator WORKING_DIRECTORY "${CMAKE_CURRENT_SOU
 
 
 
-# Nie wiem co to robi, trzeba będzie sprawdzić / usunąć
+# To coś tworzy podfolder w projekcie
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
-SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
+SOURCE_GROUP(utilities REGULAR_EXPRESSION ".*/utilities/.*" )
+SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*Shader*" )
 
 
 if (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )

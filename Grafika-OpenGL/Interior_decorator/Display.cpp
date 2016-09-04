@@ -11,7 +11,7 @@ void Display::InitializeVertexArray()
 
 void Display::InitializeShaders()
 {
-	int pID = 0;
+	//int pID = 0;
 	for (unsigned int i = 0; i < data.size(); i++) {
 		if (IsNewShader(i)) {
 			programID.push_back( LoadShaders(data[i].vertexShaderPath.c_str(),
