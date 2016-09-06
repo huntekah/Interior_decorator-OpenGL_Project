@@ -14,7 +14,6 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <vector>
-#include "common/shader.hpp"
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
 #include "common/texture.hpp"

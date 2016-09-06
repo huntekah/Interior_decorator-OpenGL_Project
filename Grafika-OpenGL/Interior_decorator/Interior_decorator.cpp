@@ -15,7 +15,6 @@ GLFWwindow* window;
 
 //Include custom libraries
 #include "file_loader.h"
-#include "common/shader.hpp"
 #include "Display.h"
 using namespace glm;
 

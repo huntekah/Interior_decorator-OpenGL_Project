@@ -23,6 +23,7 @@ void Display::GetHandleMVP()
 	}
 }
 
+
 void Display::LoadTextures()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
