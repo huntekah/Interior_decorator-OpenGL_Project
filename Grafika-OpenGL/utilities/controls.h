@@ -10,8 +10,17 @@
 #include "control_objects.h"
 #include "control_camera.h"
 
-class Controls: protected ControlObjects, protected ControlCamera{
+class Controls: protected ControlObjects, protected ControlCamera, private Time{
+private:
+	void ActionNone();
+	void ActionEdit();
+	GLFWwindow *const& window;
+	unsigned int keyRepeatTempoID;
+protected:
+
 public:
+	enum ActionType { escape, edit, none };
+	ActionType Action;
 	Controls(GLFWwindow *const& window_);
 	void ControlInput();
 };

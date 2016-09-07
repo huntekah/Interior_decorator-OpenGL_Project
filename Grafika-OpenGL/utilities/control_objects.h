@@ -13,14 +13,21 @@ class ControlObjects: private Time {
 private:
 	GLFWwindow *const& window;
 	void SetTransformationValues();
-	void ClearTransformationValues();
+	unsigned int ObjectID;
+	unsigned int ObjectAmount;
+	double transformationSpeed;
+	void ControlSpeed();
+	void ChangeObject();
+	unsigned int keyRepeatTempoID;
 public:
+	void SetObjectAmout(unsigned int ObjectAmount_);
+	unsigned int GetObjectID();
 	enum transformation_type { none_t, translation_t, scale_t, rotation_t };
 	transformation_type transformation_t;
 	glm::vec3 translation;
 	glm::vec3 scale;
 	glm::vec3 rotation;
-	ControlObjects(	GLFWwindow *const& window_, glm::vec3 translation_ = glm::vec3(0.0f, 0.0f, 0.0f), 
+	ControlObjects(	GLFWwindow *const& window_,  glm::vec3 translation_ = glm::vec3(0.0f, 0.0f, 0.0f), 
 					glm::vec3 scale_ = glm::vec3(0.0f, 0.0f, 0.0f), 
 					glm::vec3 rotation_ = glm::vec3( 0.0f, 0.0f, 0.0f));
 protected:

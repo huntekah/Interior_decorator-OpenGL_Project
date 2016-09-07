@@ -116,7 +116,7 @@ int main( void )
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
+	while( Scene.Action != Controls::escape &&
 		   glfwWindowShouldClose(window) == 0 );
 	///Scene.Save();
 	// Close OpenGL window and terminate GLFW

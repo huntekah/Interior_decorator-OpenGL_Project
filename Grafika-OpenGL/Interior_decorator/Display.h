@@ -17,13 +17,12 @@
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
 #include "common/texture.hpp"
-//#include "common/controls.hpp"
 #include "utilities/shader_loader.h"
 #include "utilities/time.h"			
 #include "utilities/controls.h"
 class Display : protected FileLoader, 
 				protected ShaderLoader, 
-				protected Controls,
+				public Controls,
 				private Time{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1

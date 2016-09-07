@@ -83,13 +83,6 @@ void Display::LoadIntoVBO()
 void Display::InitializeDrawObjects()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
-		//modelMatrix.emplace_back(glm::mat4(1.0));
-		
-		/*Translations*/
-		//modelMatrix[i] = glm::translate(modelMatrix[i], glm::vec3(data[i].x, data[i].y, data[i].z));	// translation
-		//modelMatrix[i] = glm::scale(modelMatrix[i], glm::vec3(data[i].scaleX, data[i].scaleY, data[i].scaleZ));	// scaling
-		//modelMatrix[i] = modelMatrix[i] * glm::toMat4(glm::quat(data[i].rotation.w, data[i].rotation.x, data[i].rotation.y, data[i].rotation.z));	// rotating
-	
 		MVP.emplace_back(glm::mat4());
 	}
 }
@@ -107,6 +100,8 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 	LoadIntoVBO();
 	
 	InitializeDrawObjects();
+
+	SetObjectAmout(data.size());
 }
 
 Display::~Display()
@@ -127,9 +122,9 @@ bool Display::Draw()
 {
 		///TEMP
 	ControlInput();
-		if (ControlObjects::transformation_t == translation_t) Translate(1, ControlObjects::translation);
-		if (ControlObjects::transformation_t == scale_t) Scale(1, ControlObjects::scale);
-		if (ControlObjects::transformation_t == rotation_t) Rotate(1, ControlObjects::rotation);
+		if (ControlObjects::transformation_t == translation_t) Translate(ControlObjects::GetObjectID(), ControlObjects::translation);
+		if (ControlObjects::transformation_t == scale_t) Scale(ControlObjects::GetObjectID(), ControlObjects::scale);
+		if (ControlObjects::transformation_t == rotation_t) Rotate(ControlObjects::GetObjectID(), ControlObjects::rotation);
 	///SetDeltaTime();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
