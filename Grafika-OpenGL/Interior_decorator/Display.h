@@ -17,10 +17,14 @@
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
 #include "common/texture.hpp"
-#include "common/controls.hpp"
+//#include "common/controls.hpp"
 #include "utilities/shader_loader.h"
-
-class Display : protected FileLoader, protected ShaderLoader{
+#include "utilities/time.h"			
+#include "utilities/controls.h"
+class Display : protected FileLoader, 
+				protected ShaderLoader, 
+				protected Controls,
+				private Time{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many
@@ -47,8 +51,7 @@ private:
 	std::vector<GLuint> elementBuffer;	// 1 .. 1
 
 	std::vector<GLuint> lightID;		// 1 .. many
-	
-	double lastTime;
+
 
 	//inicialised not to inicialise them in each draw loop;
 	glm::mat4 projectionMatrix;
@@ -70,11 +73,7 @@ private:
 	void LoadTextures();
 	void LoadOpenGLObjects();
 	void LoadIntoVBO();
-	void InitializeTime(); //inicializes lastTime and DeltaTime Variables.
-	double SetDeltaTime();	// updates deltaTime Variable with a time between last call of this function
 	void InitializeDrawObjects();
-
-	double deltaTime;
 	
 public:
 	Display(std::string, GLFWwindow*const&);
@@ -87,6 +86,6 @@ public:
 	void Scale(int id, glm::vec3 scale);
 	void Rotate(int id, glm::quat rotation);
 	void Rotate(int id, double yaw, double pitch, double roll);
-	
+	void Rotate(int id, glm::vec3 rotation);
 
 };

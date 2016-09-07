@@ -87,6 +87,7 @@ int main( void )
 		///glClear( GL_COLOR_BUFFER_BIT );
 
 		//Scene.Rotate(1,0.001f,0.0f,0.0f);
+		/*
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 			Scene.Translate(0, 0.0, 0.007, 0.00);
 		}
@@ -104,7 +105,7 @@ int main( void )
 		}
 		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
 			Scene.Scale(0, 0.999f, 0.999f, 0.999f);
-		}
+		}*/
 		//Scene.Translate(2, 0, 0.0007, 0.000);
 		//Scene.Scale(2, 1.0003, 1.0003, 1.0003);
 		Scene.Draw();
@@ -117,7 +118,7 @@ int main( void )
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
 		   glfwWindowShouldClose(window) == 0 );
-	Scene.Save();
+	///Scene.Save();
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 	

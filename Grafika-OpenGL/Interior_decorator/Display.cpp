@@ -79,17 +79,6 @@ void Display::LoadIntoVBO()
 	}
 }
 
-void Display::InitializeTime()
-{
-	lastTime = glfwGetTime();
-}
-
-double Display::SetDeltaTime()
-{
-	deltaTime = glfwGetTime() - lastTime;
-	lastTime = glfwGetTime();
-	return deltaTime;
-}
 
 void Display::InitializeDrawObjects()
 {
@@ -105,7 +94,7 @@ void Display::InitializeDrawObjects()
 	}
 }
 
-Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path) , window(_window)
+Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path) , window(_window), Controls(_window)
 {
 	//Inicialization
 	if (FileLoader::Load() != 0) exit(EXIT_FAILURE); // /*TOCHANGE*/PRZEROBIC NA TRY - CATCH exception
@@ -136,7 +125,12 @@ Display::~Display()
 
 bool Display::Draw()
 {
-	SetDeltaTime();
+		///TEMP
+	ControlInput();
+		if (ControlObjects::transformation_t == translation_t) Translate(1, ControlObjects::translation);
+		if (ControlObjects::transformation_t == scale_t) Scale(1, ControlObjects::scale);
+		if (ControlObjects::transformation_t == rotation_t) Rotate(1, ControlObjects::rotation);
+	///SetDeltaTime();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -147,9 +141,11 @@ bool Display::Draw()
 	tylko referencję którą mamy w klasie.
 	+ wtedy będzie można te dwa procesy jakoś fajnie zrównoleglić
 	(rysowania i odbierania bodźców z klawiatury)*/
-	computeMatricesFromInputs();
-	projectionMatrix = getProjectionMatrix();
-	viewMatrix = getViewMatrix();
+	///computeMatricesFromInputs();
+	///projectionMatrix = getProjectionMatrix();
+	///viewMatrix = getViewMatrix();
+	projectionMatrix = Controls::getProjectionMatrix();
+	viewMatrix = Controls::getViewMatrix();
 
 	////// Start of the rendering
 	for (unsigned int i = 0; i < data.size(); i++) {
@@ -274,9 +270,26 @@ void Display::Rotate(int id, double yaw, double pitch, double roll) // radian ro
 	s1 = sin(yaw / 2);
 	s2 = sin(pitch / 2);
 	s3 = sin(roll / 2);
-	rotation.w = c1*c2*c3 - s1*s2*s3;
-	rotation.x = s1*s2*c3 + c1*c2*s3;
-	rotation.y = s1*c2*c3 + c1*s2*s3;
-	rotation.z = c1*s2*c3 - s1*c2*s3;
+	rotation.w = (float)(c1*c2*c3 - s1*s2*s3);
+	rotation.x = (float)(s1*s2*c3 + c1*c2*s3);
+	rotation.y = (float)(s1*c2*c3 + c1*s2*s3);
+	rotation.z = (float)(c1*s2*c3 - s1*c2*s3);
 	Rotate(id, rotation);
+}
+
+void Display::Rotate(int id, glm::vec3 rotation)
+{
+	double c1, c2, c3, s1, s2, s3;
+	glm::quat _rotation;
+	c1 = cos(rotation.x / 2);
+	c2 = cos(rotation.y / 2);
+	c3 = cos(rotation.z / 2);
+	s1 = sin(rotation.x / 2);
+	s2 = sin(rotation.y / 2);
+	s3 = sin(rotation.z / 2);
+	_rotation.w = (float)(c1*c2*c3 - s1*s2*s3);
+	_rotation.x = (float)(s1*s2*c3 + c1*c2*s3);
+	_rotation.y = (float)(s1*c2*c3 + c1*s2*s3);
+	_rotation.z = (float)(c1*s2*c3 - s1*c2*s3);
+	Rotate(id, _rotation);
 }

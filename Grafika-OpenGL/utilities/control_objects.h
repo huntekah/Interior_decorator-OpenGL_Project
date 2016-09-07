@@ -7,22 +7,22 @@
 
 #include <glfw3.h>
 
+#include "time.h"
 
-
-class ControlObjects {
+class ControlObjects: private Time {
 private:
-	double lastTime;
-	double deltaTime;
-	void InitializeTime();
-	double SetDeltaTime();
 	GLFWwindow *const& window;
+	void SetTransformationValues();
+	void ClearTransformationValues();
 public:
+	enum transformation_type { none_t, translation_t, scale_t, rotation_t };
+	transformation_type transformation_t;
 	glm::vec3 translation;
 	glm::vec3 scale;
-	glm::quat rotation;
+	glm::vec3 rotation;
 	ControlObjects(	GLFWwindow *const& window_, glm::vec3 translation_ = glm::vec3(0.0f, 0.0f, 0.0f), 
 					glm::vec3 scale_ = glm::vec3(0.0f, 0.0f, 0.0f), 
-					glm::quat rotation_ = glm::quat(1.0f, 0.0f, 0.0f, 0.0f));
+					glm::vec3 rotation_ = glm::vec3( 0.0f, 0.0f, 0.0f));
 protected:
 	void ComputeTranslations();
 	

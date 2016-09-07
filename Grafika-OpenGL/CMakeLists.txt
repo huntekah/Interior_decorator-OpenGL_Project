@@ -69,8 +69,12 @@ add_executable(Interior_decorator
 	utilities/shader_loader.h
 	utilities/control_objects.cpp
 	utilities/control_objects.h
-	common/controls.cpp
-	common/controls.hpp
+	utilities/controls.cpp
+	utilities/controls.h
+	utilities/control_camera.cpp
+	utilities/control_camera.h
+	utilities/time.cpp
+	utilities/time.h
 	common/texture.cpp
 	common/texture.hpp
 	common/objloader.cpp
