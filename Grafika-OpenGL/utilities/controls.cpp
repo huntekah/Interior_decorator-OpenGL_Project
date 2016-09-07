@@ -29,7 +29,7 @@ Controls::Controls(GLFWwindow * const & window_) :
 	window(window_), ControlCamera(window_), ControlObjects(window_)
 {
 	Action = none;
-	keyRepeatTempoID = Controls::Time::SetMeasureTempo(3.4);
+	keyRepeatTempoID = Controls::Time::SetMeasureTempo(0.4);
 	//glfwPollEvents();
 }
 
@@ -41,4 +41,7 @@ void Controls::ControlInput()
 		ComputeTranslations();
 	}
 	computeMatricesFromInputs();
+
+	if (Action == edit) glClearColor(0.02f, 0.01f, 0.04f, 0.0f);
+	else glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 }
