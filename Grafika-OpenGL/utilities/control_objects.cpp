@@ -8,7 +8,6 @@ ControlObjects::ControlObjects(GLFWwindow * const & window_,  glm::vec3 translat
 	window(window_), translation(translation_), scale(scale_), rotation(rotation_)
 {
 	transformation_t = none_t;
-	InitializeTime();
 	ObjectID = 0;
 	transformationSpeed = 1.0;
 	keyRepeatTempoID = SetMeasureTempo(0.3);
@@ -16,7 +15,6 @@ ControlObjects::ControlObjects(GLFWwindow * const & window_,  glm::vec3 translat
 
 void ControlObjects::ComputeTranslations()
 {
-	SetDeltaTime();
 	ControlSpeed();
 	ChangeObject();
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {

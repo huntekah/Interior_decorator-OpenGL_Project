@@ -23,7 +23,7 @@
 class Display : protected FileLoader, 
 				protected ShaderLoader, 
 				public Controls,
-				private Time{
+				private virtual Time{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1
 	std::vector<GLuint> programID;		// 1 .. many

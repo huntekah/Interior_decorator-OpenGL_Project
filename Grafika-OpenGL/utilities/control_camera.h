@@ -9,7 +9,7 @@
 
 #include "time.h"
 
-class ControlCamera: private Time {
+class ControlCamera: private virtual Time {
 private:
 	GLFWwindow *const& window;
 	glm::mat4 ViewMatrix;

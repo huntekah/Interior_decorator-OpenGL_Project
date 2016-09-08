@@ -47,3 +47,8 @@ bool Time::Tempometer(unsigned int id)
 	}
 	return false;
 }
+
+double Time::getDeltaTime()
+{
+	return deltaTime;
+}

@@ -1,4 +1,4 @@
-// Include standard headers
+﻿// Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -86,39 +86,14 @@ int main( void )
 		// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
 		///glClear( GL_COLOR_BUFFER_BIT );
 
-		//Scene.Rotate(1,0.001f,0.0f,0.0f);
-		/*
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-			Scene.Translate(0, 0.0, 0.007, 0.00);
-		}
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-			Scene.Translate(0, 0.0, -0.007, -0.00);
-		}
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-			Scene.Rotate(0, 0.001f, 0.0f, 0.0f);
-		}
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-			Scene.Rotate(0, -0.001f, 0.0f, 0.0f);
-		}
-		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-			Scene.Scale(0, 1.001f, 1.001f, 1.001f);
-		}
-		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-			Scene.Scale(0, 0.999f, 0.999f, 0.999f);
-		}*/
-		//Scene.Translate(2, 0, 0.0007, 0.000);
-		//Scene.Scale(2, 1.0003, 1.0003, 1.0003);
 		Scene.Draw();
 
-		// Swap buffers
-		///glfwSwapBuffers(window);
-		//glClearColor(0.0f, 1.0f, 0.4f, 0.0f);
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
 	while( Scene.Action != Controls::escape &&
 		   glfwWindowShouldClose(window) == 0 );
-	///Scene.Save();
+	///Scene.Save();   //// TU ODKOMENTUJ BY ZOBACZY DZIAŁANIE ZAPISYWANIA
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 	

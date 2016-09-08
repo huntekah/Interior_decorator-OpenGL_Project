@@ -9,7 +9,7 @@
 
 #include "time.h"
 
-class ControlObjects: private Time {
+class ControlObjects: private virtual Time {
 private:
 	GLFWwindow *const& window;
 	void SetTransformationValues();

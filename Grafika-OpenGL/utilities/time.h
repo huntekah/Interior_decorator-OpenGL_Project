@@ -15,4 +15,5 @@ public:
 	bool MeasureTempo( unsigned int id);
 	void ResetMeasureTempo(unsigned int id);
 	bool Tempometer(unsigned int id);
+	double getDeltaTime();
 };

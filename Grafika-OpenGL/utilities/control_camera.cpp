@@ -22,7 +22,6 @@ ControlCamera::ControlCamera(GLFWwindow * const & window_):window(window_)
 
 void ControlCamera::computeMatricesFromInputs()
 {
-	Time::SetDeltaTime();
 
 	glfwGetCursorPos(window, &xpos, &ypos);
 	///glfwGetWindowSize(window, &screen_width, &screen_height); /// ?TO MAINTAIN SPEED OF CODE;

@@ -10,7 +10,7 @@
 #include "control_objects.h"
 #include "control_camera.h"
 
-class Controls: protected ControlObjects, protected ControlCamera, private Time{
+class Controls: protected ControlObjects, protected ControlCamera, private virtual Time{
 private:
 	void ActionNone();
 	void ActionEdit();
