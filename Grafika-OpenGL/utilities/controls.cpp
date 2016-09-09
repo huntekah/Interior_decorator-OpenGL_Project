@@ -13,6 +13,12 @@ void Controls::ActionNone()
 	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
 			Action = edit;
 	}
+	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		if (Controls::Time::MeasureTempo(keyRepeatTempoID)) {
+			Action = save;
+			Controls::Time::ResetMeasureTempo(keyRepeatTempoID);
+		}
+	}
 }
 
 void Controls::ActionEdit()
@@ -40,6 +46,7 @@ void Controls::ControlInput()
 		ActionEdit();
 		ComputeTranslations();
 	}
+	else if (Action == save) Action = none;
 	computeMatricesFromInputs();
 
 	if (Action == edit) glClearColor(0.02f, 0.01f, 0.04f, 0.0f);

@@ -127,6 +127,7 @@ bool Display::Draw()
 		if (ControlObjects::transformation_t == scale_t) Scale(ControlObjects::GetObjectID(), ControlObjects::scale);
 		if (ControlObjects::transformation_t == rotation_t) Rotate(ControlObjects::GetObjectID(), ControlObjects::rotation);
 	SetDeltaTime();
+	if (Action == Controls::save) {std::cout << "Saved scene\n"; Save();}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 

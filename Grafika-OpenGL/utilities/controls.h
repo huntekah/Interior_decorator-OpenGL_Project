@@ -19,7 +19,7 @@ private:
 protected:
 
 public:
-	enum ActionType { escape, edit, none };
+	enum ActionType { escape, edit, save, none };
 	ActionType Action;
 	Controls(GLFWwindow *const& window_);
 	void ControlInput();
