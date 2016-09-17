@@ -75,6 +75,8 @@ add_executable(Interior_decorator
 	utilities/control_camera.h
 	utilities/time.cpp
 	utilities/time.h
+	utilities/assimp_Loader.cpp
+	utilities/assimp_Loader.h
 	common/texture.cpp
 	common/texture.hpp
 	common/objloader.cpp
