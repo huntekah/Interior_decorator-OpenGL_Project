@@ -1,4 +1,4 @@
-﻿# CMake entry point
+# CMake entry point
 cmake_minimum_required (VERSION 2.6)
 project (Grafika)
 
@@ -38,6 +38,7 @@ include_directories(
 	external/glm-0.9.7.1/
 	external/glew-1.13.0/include/
 	external/assimp-3.0.1270/include/
+	external/SOIL/src/
 	external/bullet-2.81-rev2613/src/
 	.
 )
@@ -77,6 +78,9 @@ add_executable(Interior_decorator
 	utilities/time.h
 	utilities/assimp_Loader.cpp
 	utilities/assimp_Loader.h
+	utilities/Mesh.h
+	utilities/Shader.h
+	utilities/Model.cpp
 	common/texture.cpp
 	common/texture.hpp
 	common/objloader.cpp
@@ -92,7 +96,10 @@ add_executable(Interior_decorator
 target_link_libraries(Interior_decorator
 	${ALL_LIBS}
 	ANTTWEAKBAR_116_OGLCORE_GLFW
+	assimp
+	/SOIL/lib/SOIL	
 )
+# ^ change
 # Xcode and Visual working directories
 set_target_properties(Interior_decorator PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Interior_decorator/")
 create_target_launcher(Interior_decorator WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Interior_decorator/")
@@ -100,7 +107,7 @@ create_target_launcher(Interior_decorator WORKING_DIRECTORY "${CMAKE_CURRENT_SOU
 
 
 
-# To coś tworzy podfolder w projekcie
+# To co? tworzy podfolder w projekcie
 SOURCE_GROUP(common REGULAR_EXPRESSION ".*/common/.*" )
 SOURCE_GROUP(utilities REGULAR_EXPRESSION ".*/utilities/.*" )
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*Shader*" )

@@ -11,6 +11,7 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
+
 ### GLFW ###
 
 add_subdirectory (glfw-3.1.2)
@@ -177,4 +178,21 @@ add_subdirectory( bullet-2.81-rev2613/src/BulletSoftBody )
 add_subdirectory( bullet-2.81-rev2613/src/BulletCollision )
 add_subdirectory( bullet-2.81-rev2613/src/BulletDynamics )
 add_subdirectory( bullet-2.81-rev2613/src/LinearMath )
+
+### SOIL ###
+
+include_directories(
+SOIL/src/
+)
+
+add_library( SOIL STATIC
+	${GLEW_SOURCE}
+	${GLEW_INCLUDE}
+)
+
+target_link_libraries(SOIL
+	${OPENGL_LIBRARY}
+	${EXTRA_LIBS}
+)
+
 

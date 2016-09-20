@@ -2,6 +2,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+
 class AssimpLoader {
 	Assimp::Importer importer;
 public:
