@@ -77,23 +77,12 @@ add_executable(Interior_decorator
 	utilities/control_camera.h
 	utilities/time.cpp
 	utilities/time.h
-	utilities/assimp_Loader.cpp
-	utilities/assimp_Loader.h
 	utilities/Mesh.cpp
 	utilities/Mesh.h
 	utilities/Shader.cpp
 	utilities/Shader.h
 	utilities/Model.cpp
 	utilities/Model.h
-
-	common/texture.cpp
-	common/texture.hpp
-	common/objloader.cpp
-	common/objloader.hpp
-	common/vboindexer.cpp
-	common/vboindexer.hpp
-	common/quaternion_utils.cpp
-	common/quaternion_utils.hpp
 	
 	Interior_decorator/VertexShader.vert
 	Interior_decorator/FragmentShader.frag

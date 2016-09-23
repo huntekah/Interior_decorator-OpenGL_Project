@@ -18,10 +18,6 @@ RawObjData::RawObjData(const RawObjData & example):
 
 std::ostream & operator<<(std::ostream &screen, RawObjData &Obj) {
 	screen << "Object: \t\t" << Obj.objFilePath << "\n";
-	/*obsolete*/
-	/*screen << "Position =\t\t( " << Obj.x << ", " << Obj.y << ", " << Obj.z << " )\n";
-	screen << "Rotation =\t\t( " << Obj.rotation.w << ", " << Obj.rotation.x << ", " << Obj.rotation.y << ", "<<Obj.rotation.z <<" )\n";
-	screen << "Scale = \t\t( " << Obj.scaleX << ", " << Obj.scaleY << ", " << Obj.scaleZ << " )\n";*/
 	screen << "Model Matrix:\t\t" << Obj.modelMatrix[0][0] << "\t" << Obj.modelMatrix[0][1] << "\t" 
 		   << Obj.modelMatrix[0][2] << "\t" << Obj.modelMatrix[0][3] << "\n";
 	screen << "\t\t\t\t" << Obj.modelMatrix[1][0] << "\t" << Obj.modelMatrix[1][1] << "\t"

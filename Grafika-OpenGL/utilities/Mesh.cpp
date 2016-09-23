@@ -48,7 +48,6 @@ public:
 		this->indices = indices;
 		this->textures = textures;
 
-		// Now that we have all the required data, set the vertex buffers and its attribute pointers.
 		this->setupMesh();
 	}
 
@@ -70,9 +69,8 @@ public:
 			else if (name == "texture_specular")
 				ss << specularNr++; // Transfer GLuint to stream
 			number = ss.str();
-			// Now set the sampler to the correct texture unit
+			//  set the sampler to the correct texture unit
 			glUniform1i(glGetUniformLocation(shader.Program, (name + number).c_str()), i);
-			// And finally bind the texture
 			glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
 		}
 

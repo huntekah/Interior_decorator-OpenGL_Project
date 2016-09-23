@@ -36,7 +36,6 @@ Controls::Controls(GLFWwindow * const & window_) :
 {
 	Action = none;
 	keyRepeatTempoID = Controls::Time::SetMeasureTempo(0.4);
-	//glfwPollEvents();
 }
 
 void Controls::ControlInput()

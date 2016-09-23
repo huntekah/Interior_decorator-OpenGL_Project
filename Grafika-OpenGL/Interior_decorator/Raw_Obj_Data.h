@@ -12,10 +12,6 @@ class RawObjData {
 		//copy constructor
 		RawObjData(const RawObjData& example);
 		int id;
-		/*double x, y, z;
-	//	double quatW, quatX, quatY, quatZ;
-		glm::quat rotation;
-		double scaleX, scaleY, scaleZ;*/
 		glm::mat4 modelMatrix;
 		const std::string objFilePath;
 		const std::string objUVMapPath;

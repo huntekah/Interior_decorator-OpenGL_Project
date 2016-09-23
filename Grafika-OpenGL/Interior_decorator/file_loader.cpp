@@ -22,15 +22,7 @@ int FileLoader::LoadNextObject()
 		file >> FragmentShaderPath;
 		file >> VertexShaderPath;
 		file >> modelMatrix;
-		/*file >> y;
-		file >> z;
-		file >> quatW;
-		file >> quatX;
-		file >> quatY;
-		file >> quatZ;
-		file >> ScaleX;
-		file >> ScaleY;
-		file >> ScaleZ;*/
+		
 
 		/*	Either no characters were extracted, or the characters extracted
 		could not be interpreted as a valid value of the appropriate type.*/
@@ -57,16 +49,6 @@ int FileLoader::SaveObject(int id)
 		file << data[id].fragmentShaderPath << "\t";
 		file << data[id].vertexShaderPath << "\n";
 		file << data[id].modelMatrix;
-		/*file << data[id].x << "\t";
-		file << data[id].y << "\t";
-		file << data[id].z << "\t";
-		file << data[id].rotation.w << "\t";
-		file << data[id].rotation.x << "\t";
-		file << data[id].rotation.y << "\t";
-		file << data[id].rotation.z << "\t";
-		file << data[id].scaleX << "\t";
-		file << data[id].scaleY << "\t";
-		file << data[id].scaleZ << "\n";*/
 
 		/*Some errors occured duh*/
 		if (!file.good()) return -1;

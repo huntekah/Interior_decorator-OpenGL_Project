@@ -90,6 +90,7 @@ int main( void )
 	while( (Scene.Action != Controls::escape &&
 		   glfwWindowShouldClose(window) == 0));
 	///Scene.Save();   //// TU ODKOMENTUJ BY ZOBACZY DZIAŁANIE ZAPISYWANIA
+
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 	

@@ -14,9 +14,6 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <vector>
-#include "common/objloader.hpp"
-#include "common/vboindexer.hpp"
-#include "common/texture.hpp"
 
 #include "utilities/shader_loader.h"
 #include "utilities/time.h"			
@@ -30,7 +27,6 @@ class Display : protected FileLoader,
 				private virtual Time{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1
-	///std::vector<GLuint> programID;		// 1 .. many OLD APPROACH
 
 	std::vector<GLuint> matrixID;		// 1 .. many
 	std::vector<GLuint> viewMatrixID;	// 1 .. many
@@ -77,7 +73,6 @@ private:
 	void InitializeVertexArray();
 	void InitializeShaders();
 	void GetHandleMVP();
-	void LoadTextures();
 	void LoadOpenGLObjects();
 	void LoadIntoVBO();
 	void InitializeMVP();

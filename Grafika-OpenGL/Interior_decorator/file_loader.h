@@ -24,7 +24,7 @@ class FileLoader {
 		   -2 file does not exist */
 		int Load(const std::string path);
 		int Load();
-		int Save(const std::string path); // TODO
+		int Save(const std::string path);
 		int Save(); 
 		void SetPath(const std::string path);
 		void Clear();

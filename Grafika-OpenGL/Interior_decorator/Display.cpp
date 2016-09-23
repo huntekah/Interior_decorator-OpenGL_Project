@@ -27,31 +27,10 @@ void Display::GetHandleMVP()
 }
 
 
-void Display::LoadTextures()
-{
-	for (unsigned int i = 0; i < data.size(); i++) {
-		texture.emplace_back(loadDDS(data[i].objUVMapPath.c_str()));
-		//textureID.emplace_back(glGetUniformLocation( (shader[ ObjToProgramID[i] ]).Program, "myTextureSampler")); /*TOCHANGE why myTextureSampler?*/
-	}
-}
 
 void Display::LoadOpenGLObjects()
 {
-	for (unsigned int i = 0; i < data.size(); i++) { /*TOCHANGE IMPORTANT*/ // funkcja ssie, trzeba loadOBJ i indexVBO przepisać na wersję przyjmującą vector<vector<glm::vec3>>
-	//	//inserts empty vectors into vector of vectors.
-	//	vertices.push_back(std::vector<glm::vec3>());
-	//	uvs.push_back(std::vector<glm::vec2>());
-	//	normals.push_back(std::vector<glm::vec3>());
-	//	
-	//	indices.push_back(std::vector<unsigned short>());
-	//	indexedVertices.push_back(std::vector<glm::vec3>());
-	//	indexedUvs.push_back(std::vector<glm::vec2>());
-	//	indexedNormals.push_back(std::vector<glm::vec3>());
-	//	
-	//	if (false == loadOBJ(data[i].objFilePath.c_str(), vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE); /*TOCHANGE*/
-	////	if (false == loadAssImp(data[i].objFilePath.c_str(),indices[i], vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE);
-	//	indexVBO(vertices[i], uvs[i], normals[i], indices[i], indexedVertices[i], indexedUvs[i], indexedNormals[i]); /*TOCHANGE*/
-	//	
+	for (unsigned int i = 0; i < data.size(); i++) { 
 		model.emplace_back((GLchar*)data[i].objFilePath.c_str());
 	
 	}
@@ -60,26 +39,6 @@ void Display::LoadOpenGLObjects()
 void Display::LoadIntoVBO()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
-	/*	vertexBuffer.push_back(GLuint());
-		glGenBuffers(1, &vertexBuffer[i]);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[i]);
-		glBufferData(GL_ARRAY_BUFFER, (indexedVertices[i]).size() * sizeof(glm::vec3), &indexedVertices[i][0], GL_STATIC_DRAW);
-		
-		uvBuffer.push_back(GLuint());
-		glGenBuffers(1, &uvBuffer[i]);
-		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer[i]);
-		glBufferData(GL_ARRAY_BUFFER, indexedUvs[i].size() * sizeof(glm::vec2), &indexedUvs[i][0], GL_STATIC_DRAW);
-
-		normalBuffer.push_back(GLuint());
-		glGenBuffers(1, &normalBuffer[i]);
-		glBindBuffer(GL_ARRAY_BUFFER, normalBuffer[i]);
-		glBufferData(GL_ARRAY_BUFFER, indexedNormals[i].size() * sizeof(glm::vec3), &indexedNormals[i][0], GL_STATIC_DRAW);
-
-		elementBuffer.push_back(GLuint());
-		glGenBuffers(1, &elementBuffer[i]);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer[i]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices[i].size() * sizeof(unsigned short), &indices[i][0], GL_STATIC_DRAW);
-*/
 		glUseProgram(shader[ ObjToProgramID[i] ].Program);
 		lightID.emplace_back( glGetUniformLocation(  (shader[ ObjToProgramID[i] ]).Program, "LightPosition_worldspace") );
 	}
@@ -101,7 +60,6 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 	InitializeVertexArray();
 	InitializeShaders();
 	GetHandleMVP();
-	//LoadTextures();
 	LoadOpenGLObjects();
 	LoadIntoVBO();
 	
@@ -112,16 +70,7 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 
 Display::~Display()
 {
-	for (unsigned int i = 0; i < data.size(); i++) {
-		//glDeleteBuffers(1, &vertexBuffer[i]);
-		//glDeleteBuffers(1, &uvBuffer[i]);
-		//glDeleteBuffers(1, &normalBuffer[i]);
-		//glDeleteBuffers(1, &elementBuffer[i]);
-		//glDeleteTextures(1, &texture[i]);
-		glDeleteVertexArrays(1, &vertexArrayID[i]);
-	}
-	/*for (unsigned int i = 0; i < programID.size();i++)
-		glDeleteProgram(programID[i]);*/
+	for (unsigned int i = 0; i < data.size(); i++)	glDeleteVertexArrays(1, &vertexArrayID[i]);
 }
 
 bool Display::Draw()
@@ -143,8 +92,7 @@ bool Display::Draw()
 	////// Start of the rendering
 	for (unsigned int i = 0; i < data.size(); i++) {
 
-		//glUseProgram(programID[ObjToProgramID[i]]);
-		shader[ObjToProgramID[i]].Use();
+		shader[ObjToProgramID[i]].Use(); // glUseProgram
 
 		lightPos = glm::vec3(4, 4, 4);
 		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
@@ -156,68 +104,11 @@ bool Display::Draw()
 		glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(data[i].modelMatrix)[0][0]);
 	
 		model[i].Draw(shader[ObjToProgramID[i]]);
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, texture[i]);
-	
-		//glUniform1i(textureID[i], 0);
-
-		//// 1rst attribute buffer : vertices
-		//glEnableVertexAttribArray(0);
-		//glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[i]);
-		//glVertexAttribPointer(
-		//	0,                  // attribute /*TOCHANGE atrybut powinien być zmienną (np. i) patrz tutorial2*/
-		//	3,                  // size
-		//	GL_FLOAT,           // type
-		//	GL_FALSE,           // normalized?
-		//	0,                  // stride
-		//	(void*)0            // array buffer offset
-		//	);
-
-		//// 2nd attribute buffer : UVs
-		//glEnableVertexAttribArray(1);
-		//glBindBuffer(GL_ARRAY_BUFFER, uvBuffer[i]);
-		//glVertexAttribPointer(
-		//	1,                                // attribute
-		//	2,                                // size
-		//	GL_FLOAT,                         // type
-		//	GL_FALSE,                         // normalized?
-		//	0,                                // stride
-		//	(void*)0                          // array buffer offset
-		//	);
-
-		//// 3rd attribute buffer : normals
-		//glEnableVertexAttribArray(2);
-		//glBindBuffer(GL_ARRAY_BUFFER, normalBuffer[i]);
-		//glVertexAttribPointer(
-		//	2,                                // attribute
-		//	3,                                // size
-		//	GL_FLOAT,                         // type
-		//	GL_FALSE,                         // normalized?
-		//	0,                                // stride
-		//	(void*)0                          // array buffer offset
-		//	);
-
-		//// Index buffer
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer[i]);
-
-		//// Draw the triangles !
-		//glDrawElements(
-		//	GL_TRIANGLES,      // mode
-		//	indices[i].size(),    // count
-		//	GL_UNSIGNED_SHORT,   // type
-		//	(void*)0           // element array buffer offset
-		//);
-
-
+		
 	}
-	//glDisableVertexAttribArray(0);
-	//glDisableVertexAttribArray(1);
-	//glDisableVertexAttribArray(2);
 
-	// Swap buffers
 	glfwSwapBuffers(window);
-	//glfwPollEvents();
-
+	// glfwPollEvents();
 	return false;
 }
 
@@ -250,8 +141,7 @@ void Display::Scale(int id, glm::vec3 scale)
 void Display::Rotate(int id, glm::quat rotation)	// quaternion rotation
 {
 	rotation = glm::normalize(rotation);
-	data[id].modelMatrix = data[id].modelMatrix * glm::toMat4(rotation);
-//	data[id].rotation = data[id].rotation * rotation;				
+	data[id].modelMatrix = data[id].modelMatrix * glm::toMat4(rotation);				
 
 }
 
