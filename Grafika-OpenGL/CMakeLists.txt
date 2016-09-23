@@ -38,7 +38,7 @@ include_directories(
 	external/glm-0.9.7.1/
 	external/glew-1.13.0/include/
 	external/assimp-3.0.1270/include/
-	external/SOIL/src/
+	external/stb/
 	external/bullet-2.81-rev2613/src/
 	.
 )
@@ -66,6 +66,7 @@ add_executable(Interior_decorator
 	Interior_decorator/Raw_Obj_Data.cpp
 	Interior_decorator/Display.h
 	Interior_decorator/Display.cpp
+
 	utilities/shader_loader.cpp
 	utilities/shader_loader.h
 	utilities/control_objects.cpp
@@ -78,9 +79,13 @@ add_executable(Interior_decorator
 	utilities/time.h
 	utilities/assimp_Loader.cpp
 	utilities/assimp_Loader.h
+	utilities/Mesh.cpp
 	utilities/Mesh.h
+	utilities/Shader.cpp
 	utilities/Shader.h
 	utilities/Model.cpp
+	utilities/Model.h
+
 	common/texture.cpp
 	common/texture.hpp
 	common/objloader.cpp
@@ -92,12 +97,12 @@ add_executable(Interior_decorator
 	
 	Interior_decorator/VertexShader.vert
 	Interior_decorator/FragmentShader.frag
+
 )
 target_link_libraries(Interior_decorator
 	${ALL_LIBS}
 	ANTTWEAKBAR_116_OGLCORE_GLFW
 	assimp
-	/SOIL/lib/SOIL	
 )
 # ^ change
 # Xcode and Visual working directories

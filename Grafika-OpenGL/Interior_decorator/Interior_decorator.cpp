@@ -20,8 +20,6 @@ using namespace glm;
 
 
 
-
-
 int main( void )
 {
 	int width = 1024;
@@ -44,7 +42,7 @@ int main( void )
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow( width, height, "Interior Decorator", NULL, NULL);
 	if( window == NULL ){
-		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible.\n" );
 		getchar();
 		glfwTerminate();
 		return -1;
@@ -82,17 +80,15 @@ int main( void )
 
 	Display Scene("test.txt", window);
 	
+	
 	do{
-		// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
-		///glClear( GL_COLOR_BUFFER_BIT );
-
+		
 		Scene.Draw();
 
 		glfwPollEvents();
-
 	} // Check if the ESC key was pressed or the window was closed
-	while( Scene.Action != Controls::escape &&
-		   glfwWindowShouldClose(window) == 0 );
+	while( (Scene.Action != Controls::escape &&
+		   glfwWindowShouldClose(window) == 0));
 	///Scene.Save();   //// TU ODKOMENTUJ BY ZOBACZY DZIAŁANIE ZAPISYWANIA
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

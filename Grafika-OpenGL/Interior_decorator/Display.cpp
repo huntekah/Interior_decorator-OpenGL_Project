@@ -1,4 +1,7 @@
-﻿#include "Display.h"
+﻿#pragma once
+#include "Display.h"
+
+
 
 void Display::InitializeVertexArray()
 {
@@ -11,15 +14,15 @@ void Display::InitializeVertexArray()
 
 void Display::InitializeShaders()
 {
-	LoadShaders(data, programID, ObjToProgramID);
+	LoadShaders(data, ObjToProgramID, shader);
 }
 
 void Display::GetHandleMVP()
 {
-	for (unsigned int i = 0; i < programID.size(); i++) {
-		matrixID.emplace_back(glGetUniformLocation(programID[i], "MVP"));
-		viewMatrixID.emplace_back(glGetUniformLocation(programID[i], "V"));
-		modelMatrixID.emplace_back(glGetUniformLocation(programID[i], "M"));
+	for (unsigned int i = 0; i < shader.size(); i++) {
+		matrixID.emplace_back(glGetUniformLocation(shader[i].Program, "MVP"));
+		viewMatrixID.emplace_back(glGetUniformLocation(shader[i].Program, "V"));
+		modelMatrixID.emplace_back(glGetUniformLocation(shader[i].Program, "M"));
 	}
 }
 
@@ -28,33 +31,36 @@ void Display::LoadTextures()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		texture.emplace_back(loadDDS(data[i].objUVMapPath.c_str()));
-		textureID.emplace_back(glGetUniformLocation(programID[ ObjToProgramID[i] ], "myTextureSampler")); /*TOCHANGE why myTextureSampler?*/
+		//textureID.emplace_back(glGetUniformLocation( (shader[ ObjToProgramID[i] ]).Program, "myTextureSampler")); /*TOCHANGE why myTextureSampler?*/
 	}
 }
 
 void Display::LoadOpenGLObjects()
 {
 	for (unsigned int i = 0; i < data.size(); i++) { /*TOCHANGE IMPORTANT*/ // funkcja ssie, trzeba loadOBJ i indexVBO przepisać na wersję przyjmującą vector<vector<glm::vec3>>
-		//inserts empty vectors into vector of vectors.
-		vertices.push_back(std::vector<glm::vec3>());
-		uvs.push_back(std::vector<glm::vec2>());
-		normals.push_back(std::vector<glm::vec3>());
-		
-		indices.push_back(std::vector<unsigned short>());
-		indexedVertices.push_back(std::vector<glm::vec3>());
-		indexedUvs.push_back(std::vector<glm::vec2>());
-		indexedNormals.push_back(std::vector<glm::vec3>());
-		
-		if (false == loadOBJ(data[i].objFilePath.c_str(), vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE); /*TOCHANGE*/
-	//	if (false == loadAssImp(data[i].objFilePath.c_str(),indices[i], vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE);
-		indexVBO(vertices[i], uvs[i], normals[i], indices[i], indexedVertices[i], indexedUvs[i], indexedNormals[i]); /*TOCHANGE*/
+	//	//inserts empty vectors into vector of vectors.
+	//	vertices.push_back(std::vector<glm::vec3>());
+	//	uvs.push_back(std::vector<glm::vec2>());
+	//	normals.push_back(std::vector<glm::vec3>());
+	//	
+	//	indices.push_back(std::vector<unsigned short>());
+	//	indexedVertices.push_back(std::vector<glm::vec3>());
+	//	indexedUvs.push_back(std::vector<glm::vec2>());
+	//	indexedNormals.push_back(std::vector<glm::vec3>());
+	//	
+	//	if (false == loadOBJ(data[i].objFilePath.c_str(), vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE); /*TOCHANGE*/
+	////	if (false == loadAssImp(data[i].objFilePath.c_str(),indices[i], vertices[i], uvs[i], normals[i])) exit(EXIT_FAILURE);
+	//	indexVBO(vertices[i], uvs[i], normals[i], indices[i], indexedVertices[i], indexedUvs[i], indexedNormals[i]); /*TOCHANGE*/
+	//	
+		model.emplace_back((GLchar*)data[i].objFilePath.c_str());
+	
 	}
 }
 
 void Display::LoadIntoVBO()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
-		vertexBuffer.push_back(GLuint());
+	/*	vertexBuffer.push_back(GLuint());
 		glGenBuffers(1, &vertexBuffer[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[i]);
 		glBufferData(GL_ARRAY_BUFFER, (indexedVertices[i]).size() * sizeof(glm::vec3), &indexedVertices[i][0], GL_STATIC_DRAW);
@@ -73,15 +79,14 @@ void Display::LoadIntoVBO()
 		glGenBuffers(1, &elementBuffer[i]);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer[i]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices[i].size() * sizeof(unsigned short), &indices[i][0], GL_STATIC_DRAW);
-
-		glUseProgram(programID[ ObjToProgramID[i] ]);
-		lightID.emplace_back( glGetUniformLocation(programID[ ObjToProgramID[i] ], "LightPosition_worldspace") );
-
+*/
+		glUseProgram(shader[ ObjToProgramID[i] ].Program);
+		lightID.emplace_back( glGetUniformLocation(  (shader[ ObjToProgramID[i] ]).Program, "LightPosition_worldspace") );
 	}
 }
 
 
-void Display::InitializeDrawObjects()
+void Display::InitializeMVP()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		MVP.emplace_back(glm::mat4());
@@ -96,27 +101,27 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 	InitializeVertexArray();
 	InitializeShaders();
 	GetHandleMVP();
-	LoadTextures();
+	//LoadTextures();
 	LoadOpenGLObjects();
 	LoadIntoVBO();
 	
-	InitializeDrawObjects();
+	InitializeMVP();
 
-	SetObjectAmout(data.size());
+	SetObjectAmout(data.size());  // ControlObjects requirement.
 }
 
 Display::~Display()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
-		glDeleteBuffers(1, &vertexBuffer[i]);
-		glDeleteBuffers(1, &uvBuffer[i]);
-		glDeleteBuffers(1, &normalBuffer[i]);
-		glDeleteBuffers(1, &elementBuffer[i]);
-		glDeleteTextures(1, &texture[i]);
+		//glDeleteBuffers(1, &vertexBuffer[i]);
+		//glDeleteBuffers(1, &uvBuffer[i]);
+		//glDeleteBuffers(1, &normalBuffer[i]);
+		//glDeleteBuffers(1, &elementBuffer[i]);
+		//glDeleteTextures(1, &texture[i]);
 		glDeleteVertexArrays(1, &vertexArrayID[i]);
 	}
-	for (unsigned int i = 0; i < programID.size();i++)
-		glDeleteProgram(programID[i]);
+	/*for (unsigned int i = 0; i < programID.size();i++)
+		glDeleteProgram(programID[i]);*/
 }
 
 bool Display::Draw()
@@ -130,24 +135,16 @@ bool Display::Draw()
 	if (Action == Controls::save) {std::cout << "Saved scene\n"; Save();}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-	/*TOCHANGE bardzo brzydkie rozwiązanie.
-	zrobiłęm tylko po to, by zobaczyć czy pliki się poprawnie pokazują
-	docelowo sterowanie powinno być wywołane z zewnątrz funkcji Draw,
-	jako metoda klasy Display która nie używa extern display'a
-	tylko referencję którą mamy w klasie.
-	+ wtedy będzie można te dwa procesy jakoś fajnie zrównoleglić
-	(rysowania i odbierania bodźców z klawiatury)*/
 	///computeMatricesFromInputs();
-	///projectionMatrix = getProjectionMatrix();
-	///viewMatrix = getViewMatrix();
+	/////HERE
 	projectionMatrix = Controls::getProjectionMatrix();
 	viewMatrix = Controls::getViewMatrix();
-
+	
 	////// Start of the rendering
 	for (unsigned int i = 0; i < data.size(); i++) {
 
-		glUseProgram(programID[ObjToProgramID[i]]);
+		//glUseProgram(programID[ObjToProgramID[i]]);
+		shader[ObjToProgramID[i]].Use();
 
 		lightPos = glm::vec3(4, 4, 4);
 		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
@@ -158,63 +155,64 @@ bool Display::Draw()
 		glUniformMatrix4fv(matrixID[ObjToProgramID[i]], 1, GL_FALSE, &(MVP[i])[0][0]);
 		glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(data[i].modelMatrix)[0][0]);
 	
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture[i]);
+		model[i].Draw(shader[ObjToProgramID[i]]);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, texture[i]);
 	
-		glUniform1i(textureID[i], 0);
+		//glUniform1i(textureID[i], 0);
 
-		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[i]);
-		glVertexAttribPointer(
-			0,                  // attribute /*TOCHANGE atrybut powinien być zmienną (np. i) patrz tutorial2*/
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-			);
+		//// 1rst attribute buffer : vertices
+		//glEnableVertexAttribArray(0);
+		//glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[i]);
+		//glVertexAttribPointer(
+		//	0,                  // attribute /*TOCHANGE atrybut powinien być zmienną (np. i) patrz tutorial2*/
+		//	3,                  // size
+		//	GL_FLOAT,           // type
+		//	GL_FALSE,           // normalized?
+		//	0,                  // stride
+		//	(void*)0            // array buffer offset
+		//	);
 
-		// 2nd attribute buffer : UVs
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, uvBuffer[i]);
-		glVertexAttribPointer(
-			1,                                // attribute
-			2,                                // size
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-			);
+		//// 2nd attribute buffer : UVs
+		//glEnableVertexAttribArray(1);
+		//glBindBuffer(GL_ARRAY_BUFFER, uvBuffer[i]);
+		//glVertexAttribPointer(
+		//	1,                                // attribute
+		//	2,                                // size
+		//	GL_FLOAT,                         // type
+		//	GL_FALSE,                         // normalized?
+		//	0,                                // stride
+		//	(void*)0                          // array buffer offset
+		//	);
 
-		// 3rd attribute buffer : normals
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalBuffer[i]);
-		glVertexAttribPointer(
-			2,                                // attribute
-			3,                                // size
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-			);
+		//// 3rd attribute buffer : normals
+		//glEnableVertexAttribArray(2);
+		//glBindBuffer(GL_ARRAY_BUFFER, normalBuffer[i]);
+		//glVertexAttribPointer(
+		//	2,                                // attribute
+		//	3,                                // size
+		//	GL_FLOAT,                         // type
+		//	GL_FALSE,                         // normalized?
+		//	0,                                // stride
+		//	(void*)0                          // array buffer offset
+		//	);
 
-		// Index buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer[i]);
+		//// Index buffer
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBuffer[i]);
 
-		// Draw the triangles !
-		glDrawElements(
-			GL_TRIANGLES,      // mode
-			indices[i].size(),    // count
-			GL_UNSIGNED_SHORT,   // type
-			(void*)0           // element array buffer offset
-		);
+		//// Draw the triangles !
+		//glDrawElements(
+		//	GL_TRIANGLES,      // mode
+		//	indices[i].size(),    // count
+		//	GL_UNSIGNED_SHORT,   // type
+		//	(void*)0           // element array buffer offset
+		//);
 
 
 	}
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
+	//glDisableVertexAttribArray(0);
+	//glDisableVertexAttribArray(1);
+	//glDisableVertexAttribArray(2);
 
 	// Swap buffers
 	glfwSwapBuffers(window);

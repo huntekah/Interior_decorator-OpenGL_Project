@@ -17,16 +17,20 @@
 #include "common/objloader.hpp"
 #include "common/vboindexer.hpp"
 #include "common/texture.hpp"
+
 #include "utilities/shader_loader.h"
 #include "utilities/time.h"			
 #include "utilities/controls.h"
+#include "utilities/Model.h"
+#include "utilities/Shader.h"
+
 class Display : protected FileLoader, 
 				protected ShaderLoader, 
 				public Controls,
 				private virtual Time{
 private:
 	std::vector<GLuint> vertexArrayID;	// 1 .. 1
-	std::vector<GLuint> programID;		// 1 .. many
+	///std::vector<GLuint> programID;		// 1 .. many OLD APPROACH
 
 	std::vector<GLuint> matrixID;		// 1 .. many
 	std::vector<GLuint> viewMatrixID;	// 1 .. many
@@ -66,13 +70,17 @@ private:
 	std::vector<int> ObjToProgramID;	//binds object with ProgramID (shaders) first - obj id, second - program id
 	GLFWwindow *const&window;
 
+	// needed for Assimp Object Loading (class Model.h)
+	std::vector<Shader> shader;		// 1 .. many
+	std::vector<Model> model;	// 1 .. 1
+
 	void InitializeVertexArray();
 	void InitializeShaders();
 	void GetHandleMVP();
 	void LoadTextures();
 	void LoadOpenGLObjects();
 	void LoadIntoVBO();
-	void InitializeDrawObjects();
+	void InitializeMVP();
 	
 public:
 	Display(std::string, GLFWwindow*const&);

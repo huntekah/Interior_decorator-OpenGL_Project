@@ -6,45 +6,28 @@
 #include <iostream>
 #include <map>
 #include <vector>
-using namespace std;
-// GL Includes
-#include <GL/glew.h> // Contains all the necessery OpenGL includes
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <SOIL.h>
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "Mesh.h"
+#include "Model.h"
 
-GLint TextureFromFile(const char* path, string directory);
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
-class Model
-{
-public:
-	/*  Functions   */
-	// Constructor, expects a filepath to a 3D model.
-	Model(GLchar* path)
+Model::Model(GLchar* path)
 	{
 		this->loadModel(path);
 	}
 
-	// Draws the model, and thus all its meshes
-	void Draw(Shader shader)
+void Model::Draw(Shader shader)
 	{
 		for (GLuint i = 0; i < this->meshes.size(); i++)
 			this->meshes[i].Draw(shader);
 	}
 
-private:
-	/*  Model Data  */
-	vector<Mesh> meshes;
-	string directory;
-
-	/*  Functions   */
-	// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
-	void loadModel(string path)
+void Model::loadModel(string path)
 	{
 		// Read file via ASSIMP
 		Assimp::Importer importer;
@@ -63,7 +46,7 @@ private:
 	}
 
 	// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-	void processNode(aiNode* node, const aiScene* scene)
+void Model::processNode(aiNode* node, const aiScene* scene)
 	{
 		// Process each mesh located at the current node
 		for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -81,7 +64,7 @@ private:
 
 	}
 
-	Mesh processMesh(aiMesh* mesh, const aiScene* scene)
+Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		// Data to fill
 		vector<Vertex> vertices;
@@ -150,7 +133,7 @@ private:
 
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 	// The required info is returned as a Texture struct.
-	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
+vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
 	{
 		vector<Texture> textures;
 		for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
@@ -166,7 +149,7 @@ private:
 		}
 		return textures;
 	}
-};
+
 
 
 
@@ -178,7 +161,8 @@ GLint TextureFromFile(const char* path, string directory)
 	GLuint textureID;
 	glGenTextures(1, &textureID);
 	int width, height;
-	unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	std::cout << "filename.c_str() = " << filename.c_str() << " \n";
+	unsigned char* image = stbi_load(filename.c_str(), &width, &height, NULL, 3);
 	// Assign texture to ID
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
@@ -190,6 +174,6 @@ GLint TextureFromFile(const char* path, string directory)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	SOIL_free_image_data(image);
+	stbi_image_free(image);
 	return textureID;
 }

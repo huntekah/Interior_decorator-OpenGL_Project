@@ -12,6 +12,7 @@
 
 #include <GL/glew.h>
 #include "Interior_decorator/Raw_Obj_Data.h"
+#include "Shader.h"
 
 class ShaderLoader{
 private:
@@ -19,5 +20,7 @@ private:
 	int ShaderLoader::GetSimilarShaders(int objID, std::vector<RawObjData>& data, std::vector<int>& ObjToProgramID);
 	//GLuint LoadNextShader;
 protected:
-	void LoadShaders(std::vector<RawObjData>& data, std::vector<GLuint>& programID, std::vector<int>& ObjToProgramID);
+	void LoadShaders(std::vector<RawObjData>& data,
+						std::vector<int>& ObjToProgramID,
+						std::vector<Shader>& shader);
 };

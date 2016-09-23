@@ -1,31 +1,35 @@
 #version 330 core
 
 // Interpolated values from the vertex shaders
-in vec2 UV;
+//in vec2 UV;
 in vec3 Position_worldspace;
 in vec3 Normal_cameraspace;
 in vec3 EyeDirection_cameraspace;
 in vec3 LightDirection_cameraspace;
 
 // Ouput data
-out vec3 color;
+//out vec3 color;
 
 // Values that stay constant for the whole mesh.
-uniform sampler2D myTextureSampler;
+//uniform sampler2D myTextureSampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
+
+in vec2 TexCoords;
+out vec4 color;
+uniform sampler2D texture_diffuse1; // CHANGED 23092016
 
 void main(){
 
 	// Light emission properties
 	// You probably want to put them as uniforms
-	vec3 LightColor = vec3(1,1,1);
+	vec4 LightColor = vec4(1,1,1,0);
 	float LightPower = 50.0f;
 	
 	// Material properties
-	vec3 MaterialDiffuseColor = texture( myTextureSampler, UV ).rgb;
-	vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;
-	vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
+	vec4 MaterialDiffuseColor = vec4(texture( texture_diffuse1, TexCoords ));
+	vec4 MaterialAmbientColor = vec4(0.1,0.1,0.1,0) * MaterialDiffuseColor;
+	vec4 MaterialSpecularColor = vec4(0.3,0.3,0.3,0);
 
 	// Distance to the light
 	float distance = length( LightPosition_worldspace - Position_worldspace );
@@ -57,6 +61,7 @@ void main(){
 		// Diffuse : "color" of the object
 		MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
 		// Specular : reflective highlight, like a mirror
-		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
+		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,60) / (distance*distance);
 
+//	 color = vec4(texture(texture_diffuse1, TexCoords)) + MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
 }
