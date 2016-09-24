@@ -67,11 +67,11 @@ void ControlObjects::SetTransformationValues()
 void ControlObjects::ControlSpeed()
 {
 	if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS) { //  PLUS
-		transformationSpeed *= 1.0005;
+		transformationSpeed *= 1.005;
 		std::cout << transformationSpeed << std::endl;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS) { //  MINUS
-		transformationSpeed *= 0.9995;
+		transformationSpeed *= 0.995;
 		if (transformationSpeed == 0) transformationSpeed = 0.000000001;
 		std::cout << transformationSpeed << std::endl;
 	}

@@ -19,7 +19,7 @@ void main(){
 	// Light emission properties
 	// Might come in handy putting them as uniform
 	vec4 LightColor = vec4(1,1,1,0);
-	float LightPower = 50.0f;
+	float LightPower = 250.0f;
 	
 	// Material properties
 	vec4 MaterialDiffuseColor = vec4(texture( texture_diffuse1, TexCoords ));
@@ -56,5 +56,7 @@ void main(){
 		// Diffuse : "color" of the object
 		MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
 		// Specular : reflective highlight, like a mirror
-		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,60) / (distance*distance);
+		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,60) / (distance*distance)+
+		// Linear Specular light color
+		0.1 * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / distance;
 }

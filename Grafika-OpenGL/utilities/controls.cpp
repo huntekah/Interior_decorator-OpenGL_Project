@@ -48,6 +48,6 @@ void Controls::ControlInput()
 	else if (Action == save) Action = none;
 	computeMatricesFromInputs();
 
-	if (Action == edit) glClearColor(0.02f, 0.01f, 0.04f, 0.0f);
+	if (Action == edit) glClearColor(0.72f, 0.91f, 0.84f, 0.0f);
 	else glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 }
