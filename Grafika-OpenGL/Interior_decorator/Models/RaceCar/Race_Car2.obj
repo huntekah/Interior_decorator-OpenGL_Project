@@ -1,6 +1,6 @@
 # Blender v2.77 (sub 0) OBJ File: 'Race_Car1.obj'
 # www.blender.org
-mtllib Race_Car2.mtl
+mtllib Race_Car_reduced.mtl
 o HdBrk_Pedals_StrColum
 v -1.396100 27.204508 -21.424292
 v -2.046600 31.450308 -21.424288
