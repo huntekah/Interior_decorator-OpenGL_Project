@@ -40,8 +40,9 @@ void Display::LoadIntoVBO()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		glUseProgram(shader[ ObjToProgramID[i] ].Program);
-		lightID.emplace_back( glGetUniformLocation(  (shader[ ObjToProgramID[i] ]).Program, "LightPosition_worldspace") );
+		lightID.emplace_back( glGetUniformLocation(  (shader[ ObjToProgramID[i] ]).Program, "LightPosition_worldspace" ) );
 	}
+	shineID = glGetUniformLocation( (shader[ObjToProgramID[0]]).Program, "shine" );
 }
 
 
@@ -84,6 +85,8 @@ bool Display::Draw()
 	if (Action == Controls::save) {std::cout << "Saved scene\n"; Save();}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	if (data[ControlObjects::GetObjectID()].type == "const") ControlObjects::NextObject(); // dont allow to change objects that are "const"
+
 	///computeMatricesFromInputs();
 	/////HERE
 	projectionMatrix = Controls::getProjectionMatrix();
@@ -94,7 +97,12 @@ bool Display::Draw()
 
 		shader[ObjToProgramID[i]].Use(); // glUseProgram
 
-		lightPos = glm::vec3(4, 4, 4);
+		if (ControlObjects::GetObjectID() == i && Action == Controls::edit) glUniform3f(shineID, 0.5, 0.5, 0.5);
+		else glUniform3f(shineID, 0, 0, 0);
+
+		
+
+		lightPos = glm::vec3(4, 34, 4);
 		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
 		glUniformMatrix4fv(viewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &viewMatrix[0][0]);
 		

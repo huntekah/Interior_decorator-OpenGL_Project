@@ -22,6 +22,7 @@ private:
 public:
 	void SetObjectAmout(unsigned int ObjectAmount_);
 	unsigned int GetObjectID();
+	void NextObject();
 	enum transformation_type { none_t, translation_t, scale_t, rotation_t };
 	transformation_type transformation_t;
 	glm::vec3 translation;

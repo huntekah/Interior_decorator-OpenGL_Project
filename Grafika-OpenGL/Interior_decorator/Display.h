@@ -69,6 +69,7 @@ private:
 	// needed for Assimp Object Loading (class Model.h)
 	std::vector<Shader> shader;		// 1 .. many
 	std::vector<Model> model;	// 1 .. 1
+	GLuint shineID;
 
 	void InitializeVertexArray();
 	void InitializeShaders();

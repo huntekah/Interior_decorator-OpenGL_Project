@@ -86,6 +86,8 @@ add_executable(Interior_decorator
 	
 	Interior_decorator/VertexShader.vert
 	Interior_decorator/FragmentShader.frag
+	Interior_decorator/VertexShader_tower_house.vert
+	Interior_decorator/FragmentShader_tower_house.frag
 
 )
 target_link_libraries(Interior_decorator

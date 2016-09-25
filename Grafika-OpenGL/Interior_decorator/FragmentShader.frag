@@ -18,12 +18,12 @@ void main(){
 
 	// Light emission properties
 	// Might come in handy putting them as uniform
-	vec4 LightColor = vec4(1,1,1,0);
-	float LightPower = 250.0f;
+	vec4 LightColor = vec4(1,1,1,0.8);
+	float LightPower = 150.0f;
 	
 	// Material properties
 	vec4 MaterialDiffuseColor = vec4(texture( texture_diffuse1, TexCoords ));
-	vec4 MaterialAmbientColor = vec4(0.1,0.1,0.1,0) * MaterialDiffuseColor;
+	vec4 MaterialAmbientColor = vec4(0.3,0.3,0.3,0) * MaterialDiffuseColor;
 	vec4 MaterialSpecularColor = vec4(0.3,0.3,0.3,0);
 
 	// Distance to the light
@@ -50,6 +50,8 @@ void main(){
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
+//	if(MaterialDiffuseColor.a < 0.1)
+  //     		 discard;
 	color = 
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
@@ -58,5 +60,5 @@ void main(){
 		// Specular : reflective highlight, like a mirror
 		MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,60) / (distance*distance)+
 		// Linear Specular light color
-		0.1 * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / distance;
+		0.5 * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / distance;
 }

@@ -44,21 +44,25 @@ void ControlObjects::SetTransformationValues()
 	}
 	else if (transformation_t == scale_t) {
 		scale = glm::vec3(1.0,1.0,1.0);
+		transformationSpeed /= 40;
 		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) scale *= glm::vec3(1.0 + (transformationSpeed * deltaTime), 1.0, 1.0);
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) scale *= glm::vec3(1.0 + (-transformationSpeed * deltaTime), 1.0, 1.0);
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) scale *= glm::vec3(1.0,1.0 + (transformationSpeed * deltaTime), 1.0);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) scale *= glm::vec3(1.0,1.0 + (-transformationSpeed * deltaTime), 1.0);
 		if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) scale *= glm::vec3(1.0, 1.0, 1.0 + (transformationSpeed * deltaTime));
 		if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) scale *= glm::vec3(1.0, 1.0, 1.0 + (-transformationSpeed * deltaTime));
+		transformationSpeed *= 40;
 	}
 	else if (transformation_t == rotation_t) {
 		rotation = glm::vec3();
+		transformationSpeed /= 20;
 		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) rotation += glm::vec3(transformationSpeed * deltaTime, 0.0, 0.0);
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) rotation += glm::vec3(-transformationSpeed * deltaTime, 0.0, 0.0);
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) rotation += glm::vec3(0.0, transformationSpeed * deltaTime, 0.0);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) rotation += glm::vec3(0.0, -transformationSpeed * deltaTime, 0.0);
 		if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) rotation += glm::vec3(0.0, 0.0, transformationSpeed * deltaTime);
 		if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) rotation += glm::vec3(0.0, 0.0, -transformationSpeed * deltaTime);
+		transformationSpeed *= 20;
 	}
 
 }
@@ -106,5 +110,11 @@ void ControlObjects::SetObjectAmout(unsigned int ObjectAmount_)
 unsigned int ControlObjects::GetObjectID()
 {
 	return ObjectID;
+}
+
+void ControlObjects::NextObject()
+{
+	ObjectID = (ObjectID + 1) % ObjectAmount;
+	std::cout << ObjectID << std::endl;
 }
 

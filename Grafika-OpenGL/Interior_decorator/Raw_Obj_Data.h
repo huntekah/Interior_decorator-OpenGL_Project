@@ -14,7 +14,7 @@ class RawObjData {
 		int id;
 		glm::mat4 modelMatrix;
 		const std::string objFilePath;
-		const std::string objUVMapPath;
+		const std::string type;
 		const std::string fragmentShaderPath;
 		const std::string vertexShaderPath;
 

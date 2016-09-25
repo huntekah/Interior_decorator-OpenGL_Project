@@ -78,7 +78,7 @@ int main( void )
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
 
-	Display Scene("test.txt", window);
+	Display Scene("tower_house.txt", window);
 	
 	
 	do{

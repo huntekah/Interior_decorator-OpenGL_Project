@@ -8,7 +8,7 @@ int FileLoader::LoadNextObject()
 {
 	if (file.is_open()) {
 		std::string ObjFilePath;
-		std::string ObjUVMapPath;
+		std::string type;
 		std::string FragmentShaderPath;
 		std::string VertexShaderPath;
 		glm::mat4 modelMatrix;
@@ -18,7 +18,7 @@ int FileLoader::LoadNextObject()
 		
 		file >> ObjFilePath;
 		if (file.eof()) return 1;
-		file >> ObjUVMapPath;
+		file >> type;
 		file >> FragmentShaderPath;
 		file >> VertexShaderPath;
 		file >> modelMatrix;
@@ -28,7 +28,7 @@ int FileLoader::LoadNextObject()
 		could not be interpreted as a valid value of the appropriate type.*/
 		if (file.fail())return -1;
 
-		data.emplace_back(ObjFilePath, ObjUVMapPath,
+		data.emplace_back(ObjFilePath, type,
 			FragmentShaderPath, VertexShaderPath,
 			data.size(), modelMatrix);
 
@@ -45,7 +45,7 @@ int FileLoader::SaveObject(int id)
 	if (file.is_open()) {
 		if (!file.good()) return -1;
 		file << data[id].objFilePath<<"\t";
-		file << data[id].objUVMapPath << "\t";
+		file << data[id].type << "\t";
 		file << data[id].fragmentShaderPath << "\t";
 		file << data[id].vertexShaderPath << "\n";
 		file << data[id].modelMatrix;
