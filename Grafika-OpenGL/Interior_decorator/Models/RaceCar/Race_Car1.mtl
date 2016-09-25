@@ -1,0 +1,354 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 31.12.2014 14:26:22
+
+newmtl Rear_Light_Holders__1
+	Ns 93.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0196 0.0196 0.0196
+	Kd 0.0196 0.0196 0.0196
+	Ks 3.8700 3.8700 3.8700
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__28_Reflect_Refract.tga
+
+newmtl Rear_Light_Bulbs
+	Ns 14.0000
+	Ni 1.5000
+	d 0.7200
+	Tr 0.2800
+	Tf 0.7200 0.7200 0.7200 
+	illum 2
+	Ka 0.9569 0.0392 0.0392
+	Kd 0.9569 0.0392 0.0392
+	Ks 0.0450 0.0450 0.0450
+	Ke 0.0000 0.0000 0.0000
+
+newmtl Rear_Lights_Glass
+	Ns 0.0000
+	Ni 1.5000
+	d 0.6700
+	Tr 0.3300
+	Tf 0.6700 0.6700 0.6700 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Rear_Light_Glass_Texture.jpg
+	map_Kd Rear_Light_Glass_Texture.jpg
+
+newmtl FrontLightHolders
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Inner_Shell_Texture.jpg
+	map_Kd Inner_Shell_Texture.jpg
+	map_bump Inner_Shell_Texture.jpg
+	bump Inner_Shell_Texture.jpg
+
+newmtl WindScreen_FrontSide__Windows
+	Ns 100.0000
+	Ni 1.6000
+	d 0.0500
+	Tr 0.9500
+	Tf 0.0500 0.0500 0.0500 
+	illum 2
+	Ka 0.0235 0.0235 0.0235
+	Kd 0.0235 0.0235 0.0235
+	Ks 0.8910 0.8910 0.8910
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Windows_Texture.jpg
+	map_Kd Windows_Texture.jpg
+	map_refl Map__29_Reflect_Refract.tga
+
+newmtl Front_Light_Bulbs
+	Ns 72.0000
+	Ni 1.6000
+	d 0.9000
+	Tr 0.1000
+	Tf 0.9000 0.9000 0.9000 
+	illum 2
+	Ka 0.0314 0.0314 0.0314
+	Kd 0.0314 0.0314 0.0314
+	Ks 3.1230 3.1230 3.1230
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Front_Light_Bulbs_Texture.jpg
+	map_Kd Front_Light_Bulbs_Texture.jpg
+
+newmtl Front_Light_Holders
+	Ns 93.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0196 0.0196 0.0196
+	Kd 0.0196 0.0196 0.0196
+	Ks 3.8700 3.8700 3.8700
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__25_Reflect_Refract.tga
+
+newmtl Front_Light_Glass
+	Ns 100.0000
+	Ni 1.6000
+	d 0.0500
+	Tr 0.9500
+	Tf 0.0500 0.0500 0.0500 
+	illum 2
+	Ka 0.0039 0.0000 0.0000
+	Kd 0.0039 0.0000 0.0000
+	Ks 0.8910 0.8910 0.8910
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Front_Light_Glass_Texture.jpg
+	map_Kd Front_Light_Glass_Texture.jpg
+	map_refl Map__26_Reflect_Refract.tga
+
+newmtl Middle_Body_Shell
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0078 0.0078 0.0078
+	Kd 0.0078 0.0078 0.0078
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+
+newmtl Front_Back_Airvents
+	Ns 4.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0630 0.0630 0.0630
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Front_Back_Airvents_Texture.jpg
+	map_Kd Front_Back_Airvents_Texture.jpg
+
+newmtl Side_Mirror_Glass
+	Ns 63.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0078 0.0078 0.0078
+	Kd 0.0078 0.0078 0.0078
+	Ks 5.8770 5.8770 5.8770
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__21_Reflect_Refract.tga
+
+newmtl Under_The_Hood
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5000 0.5000 0.5000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.4050 0.4050 0.4050
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Under_The_Hood_Texture.jpg
+	map_Kd Under_The_Hood_Texture.jpg
+	map_d Under_The_Hood_Opacity.jpg
+	map_bump Under_The_Hood_Opacity.jpg
+	map_refl Map__30_Reflect_Refract.tga
+
+newmtl Body
+	Ns 100.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5000 0.5000 0.5000
+	Kd 0.5000 0.5000 0.5000
+	Ks 6.8400 6.8400 6.8400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Body_Texture.jpg
+	map_Kd Body_Texture.jpg
+	map_Ke Map__6_Falloff.tga
+	map_refl Map__8_Falloff.tga
+
+newmtl Innerior
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Innerior_Texture.jpg
+	map_Kd Innerior_Texture.jpg
+
+newmtl Interior_Dash
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Interior_Dash_Texture.jpg
+	map_Kd Interior_Dash_Texture.jpg
+
+newmtl HdBrk_Pedals_StrColum
+	Ns 70.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0196 0.0196 0.0196
+	Kd 0.0196 0.0196 0.0196
+	Ks 1.5911 1.5911 1.5911
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__19_Raytrace.tga
+
+newmtl Steering_Wheel
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka SteeringWheel_Texture.jpg
+	map_Kd SteeringWheel_Texture.jpg
+
+newmtl Seats
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Seats_Texture.jpg
+	map_Kd Seats_Texture.jpg
+
+newmtl Arial_DoorHandels_Exhuast
+	Ns 93.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5000 0.5000 0.5000
+	Kd 0.5000 0.5000 0.5000
+	Ks 3.8700 3.8700 3.8700
+	Ke 0.0000 0.0000 0.0000
+	map_Ks Arial_DoorHandels_Exhuast_Texture.jpg
+	map_refl Map__22_Reflect_Refract.tga
+
+newmtl Brake_Set_Disks
+	Ns 24.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0667 0.0667 0.0667
+	Kd 0.0667 0.0667 0.0667
+	Ks 0.6570 0.6570 0.6570
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__10_Falloff.tga
+	map_Kd Map__10_Falloff.tga
+
+newmtl BrakePads
+	Ns 39.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.4050 0.4050 0.4050
+	Ke 0.0000 0.0000 0.0000
+	map_Ka BrakePads_Texture.jpg
+	map_Kd BrakePads_Texture.jpg
+
+newmtl Blower
+	Ns 93.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0510 0.0510 0.0510
+	Kd 0.0510 0.0510 0.0510
+	Ks 3.8700 3.8700 3.8700
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__23_Reflect_Refract.tga
+
+newmtl Blower_Air_Flaps
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Candy Apple Texture.jpg
+	map_Kd Candy Apple Texture.jpg
+
+newmtl Mags
+	Ns 88.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0196 0.0196 0.0196
+	Kd 0.0196 0.0196 0.0196
+	Ks 3.8700 3.8700 3.8700
+	Ke 0.0000 0.0000 0.0000
+	map_refl Map__27_Reflect_Refract.tga
+
+newmtl Tyres
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Tyre_Texture.jpg
+	map_Kd Tyre_Texture.jpg
+	map_bump Tyre_Texture.jpg
+	bump Tyre_Texture.jpg
+

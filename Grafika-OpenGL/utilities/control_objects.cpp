@@ -11,6 +11,7 @@ ControlObjects::ControlObjects(GLFWwindow * const & window_,  glm::vec3 translat
 	ObjectID = 0;
 	transformationSpeed = 1.0;
 	keyRepeatTempoID = SetMeasureTempo(0.3);
+	increasedID = true;
 }
 
 void ControlObjects::ComputeTranslations()
@@ -86,11 +87,13 @@ void ControlObjects::ChangeObject()
 	if (MeasureTempo(keyRepeatTempoID)) {
 		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 			ObjectID = (ObjectID + 1) % ObjectAmount;
+			increasedID = true; // in order to handle const's
 			ResetMeasureTempo(keyRepeatTempoID);
 			std::cout << ObjectID << std::endl;
 		}
 		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 			ObjectID = (ObjectAmount + ObjectID - 1) % ObjectAmount;
+			increasedID = false; // in order to handle const's
 			ResetMeasureTempo(keyRepeatTempoID);
 			std::cout << ObjectID << std::endl;
 		}
@@ -114,7 +117,13 @@ unsigned int ControlObjects::GetObjectID()
 
 void ControlObjects::NextObject()
 {
-	ObjectID = (ObjectID + 1) % ObjectAmount;
-	std::cout << ObjectID << std::endl;
+	if (increasedID == true) {
+		ObjectID = (ObjectID + 1) % ObjectAmount;
+		std::cout << ObjectID << std::endl;
+	}
+	else {
+		ObjectID = (ObjectAmount + ObjectID - 1) % ObjectAmount;
+		std::cout << ObjectID << std::endl;
+	}
 }
 

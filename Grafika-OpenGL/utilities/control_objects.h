@@ -11,6 +11,7 @@
 
 class ControlObjects: private virtual Time {
 private:
+	bool increasedID;
 	GLFWwindow *const& window;
 	void SetTransformationValues();
 	unsigned int ObjectID;

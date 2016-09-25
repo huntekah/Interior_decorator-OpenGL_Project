@@ -1,0 +1,5 @@
+Models//lawka//bank.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
+0.00128599	0	0.000447333	0
+0	0.00143039	0	0
+-0.000453418	0	0.0012505	0
+-2.83983	-0.968929	-1.21372	1

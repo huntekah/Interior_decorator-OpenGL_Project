@@ -80,7 +80,6 @@ int main( void )
 
 	Display Scene("tower_house.txt", window);
 	
-	
 	do{
 		
 		Scene.Draw();
