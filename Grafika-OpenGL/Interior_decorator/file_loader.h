@@ -5,13 +5,12 @@
 #include "Raw_Obj_Data.h"
 class FileLoader {
 	private:
-		std::string DefaultPath;
 		std::fstream file;
 		int LoadNextObject();
 		int SaveObject(int id);
 
 	public:
-
+		std::string DefaultPath;
 		//used to store info needed to buffer and render data
 		std::vector<RawObjData> data;
 

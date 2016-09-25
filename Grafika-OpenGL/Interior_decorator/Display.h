@@ -20,6 +20,7 @@
 #include "utilities/controls.h"
 #include "utilities/Model.h"
 #include "utilities/Shader.h"
+#include "utilities/Skybox.h"
 
 class Display : protected FileLoader, 
 				protected ShaderLoader, 
@@ -71,12 +72,16 @@ private:
 	std::vector<Model> model;	// 1 .. 1
 	GLuint shineID;
 
+	Skybox skybox;
+	Shader skyboxShader;
+
 	void InitializeVertexArray();
 	void InitializeShaders();
 	void GetHandleMVP();
 	void LoadOpenGLObjects();
 	void LoadIntoVBO();
 	void InitializeMVP();
+	void InitializeSkybox();
 	
 public:
 	Display(std::string, GLFWwindow*const&);

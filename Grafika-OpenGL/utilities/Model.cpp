@@ -13,8 +13,9 @@
 
 #include "Model.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
+#include "utilities/img_load.h"
 
 Model::Model(GLchar* path)
 	{
@@ -162,7 +163,7 @@ GLint TextureFromFile(const char* path, string directory)
 	glGenTextures(1, &textureID);
 	int width, height;
 	std::cout << "filename.c_str() = " << filename.c_str() << " \n";
-	unsigned char* image = stbi_load(filename.c_str(), &width, &height, NULL, 3);
+	unsigned char* image = load_img(filename.c_str(), &width, &height, NULL, 3);
 	// Assign texture to ID
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
@@ -174,6 +175,6 @@ GLint TextureFromFile(const char* path, string directory)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	stbi_image_free(image);
+	free_img(image);
 	return textureID;
 }

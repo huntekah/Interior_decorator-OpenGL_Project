@@ -83,6 +83,10 @@ add_executable(Interior_decorator
 	utilities/Shader.h
 	utilities/Model.cpp
 	utilities/Model.h
+	utilities/img_load.cpp
+	utilities/img_load.h
+	utilities/Skybox.cpp
+	utilities/Skybox.h
 	
 	Interior_decorator/VertexShader.vert
 	Interior_decorator/FragmentShader.frag

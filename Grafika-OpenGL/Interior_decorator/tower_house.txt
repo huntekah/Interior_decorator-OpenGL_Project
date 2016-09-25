@@ -33,7 +33,7 @@ Models//KaraArmchair//fade01.obj	movable	FragmentShader_tower_house.frag	VertexS
 0	0.0360386	0	0
 -0.0237929	0	0.0251127	0
 1.15463	4.72811	-1.25235	1
-Models//lawka//bank.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
+Models//lawka//bank_optimized.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.00032823	7.4817e-06	-0.00128756	0
 2.18218e-05	0.00143014	1.2524e-05	0
 0.00132331	-2.54392e-05	0.000325404	0

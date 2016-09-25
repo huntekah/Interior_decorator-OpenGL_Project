@@ -53,6 +53,21 @@ void Display::InitializeMVP()
 	}
 }
 
+void Display::InitializeSkybox()
+{
+	//FileLoader::DefaultPath
+	std::vector<std::string> faces;
+	faces.push_back("skybox//right.jpg");
+	faces.push_back("skybox//left.jpg");
+	faces.push_back("skybox//top.jpg");
+	faces.push_back("skybox//bottom.jpg");
+	faces.push_back("skybox//back.jpg");
+	faces.push_back("skybox//front.jpg");
+	skybox = Skybox(faces);
+	skybox.loadCubemap();
+	skyboxShader = Shader("skyboxV.vert","skyboxF.frag");
+}
+
 Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path) , window(_window), Controls(_window)
 {
 	//Inicialization
@@ -65,7 +80,7 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 	LoadIntoVBO();
 	
 	InitializeMVP();
-
+	InitializeSkybox();
 	SetObjectAmout(data.size());  // ControlObjects requirement.
 }
 
@@ -94,26 +109,31 @@ bool Display::Draw()
 	viewMatrix = Controls::getViewMatrix();
 	
 	////// Start of the rendering
-	for (unsigned int i = 0; i < data.size(); i++) {
+	for (unsigned int j = 0; j < shader.size(); j++) {	// render all the objects with that shader
+		shader[j].Use();
+		for (unsigned int i = 0; i < data.size(); i++) {
+			if (ObjToProgramID[i] != j) continue;		// omit if object belongs to different shader.
+			///shader[ObjToProgramID[i]].Use(); // glUseProgram
 
-		shader[ObjToProgramID[i]].Use(); // glUseProgram
+			if (ControlObjects::GetObjectID() == i && Action == Controls::edit) glUniform3f(shineID, 0.5, 0.5, 0.5);
+			else glUniform3f(shineID, 0, 0, 0);
 
-		if (ControlObjects::GetObjectID() == i && Action == Controls::edit) glUniform3f(shineID, 0.5, 0.5, 0.5);
-		else glUniform3f(shineID, 0, 0, 0);
-	
 
-		lightPos = glm::vec3(4, 34, 4);
-		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
-		glUniformMatrix4fv(viewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &viewMatrix[0][0]);
-		
-		MVP[i] = projectionMatrix * viewMatrix * data[i].modelMatrix; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
-	
-		glUniformMatrix4fv(matrixID[ObjToProgramID[i]], 1, GL_FALSE, &(MVP[i])[0][0]);
-		glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(data[i].modelMatrix)[0][0]);
-	
-		model[i].Draw(shader[ObjToProgramID[i]]);
-		
+			lightPos = glm::vec3(4, 34, 4);
+			glUniform3f(lightID[ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
+			glUniformMatrix4fv(viewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &viewMatrix[0][0]);
+
+			MVP[i] = projectionMatrix * viewMatrix * data[i].modelMatrix; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
+
+			glUniformMatrix4fv(matrixID[ObjToProgramID[i]], 1, GL_FALSE, &(MVP[i])[0][0]);
+			glUniformMatrix4fv(modelMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &(data[i].modelMatrix)[0][0]);
+
+			model[i].Draw(shader[ObjToProgramID[i]]);
+
+		}
 	}
+	skybox.Draw(skyboxShader,viewMatrix,projectionMatrix);
+
 
 	glfwSwapBuffers(window);
 	// glfwPollEvents();
