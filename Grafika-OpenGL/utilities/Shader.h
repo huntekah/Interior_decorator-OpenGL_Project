@@ -13,5 +13,6 @@ public:
 	// Uses the current shader
 	void Use();
 	~Shader();
+	void Delete();
 };
 

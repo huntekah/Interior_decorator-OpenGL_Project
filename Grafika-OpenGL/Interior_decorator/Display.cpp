@@ -72,6 +72,7 @@ Display::Display(std::string path, GLFWwindow *const&_window) : FileLoader(path)
 Display::~Display()
 {
 	for (unsigned int i = 0; i < data.size(); i++)	glDeleteVertexArrays(1, &vertexArrayID[i]);
+	for (unsigned int i = 0; i < shader.size(); i++) shader[i].Delete();
 }
 
 bool Display::Draw()
@@ -99,8 +100,7 @@ bool Display::Draw()
 
 		if (ControlObjects::GetObjectID() == i && Action == Controls::edit) glUniform3f(shineID, 0.5, 0.5, 0.5);
 		else glUniform3f(shineID, 0, 0, 0);
-
-		
+	
 
 		lightPos = glm::vec3(4, 34, 4);
 		glUniform3f(lightID[ ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);

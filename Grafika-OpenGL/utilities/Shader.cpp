@@ -91,6 +91,11 @@ void Shader::Use()
 
 Shader::~Shader()
 {
+//	glDeleteProgram(Program); // Caused problems
+}
+
+void Shader::Delete()
+{
 	glDeleteProgram(Program);
 }
 
