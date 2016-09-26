@@ -1,30 +1,7 @@
 roboczy plik w którym na bieżąco uaktualniane są informacje, gdzie i nad czym można pracować.
 Można przypisać się do konkretnej pracy, żeby druga osoba wiedziała nad czym pracuje pierwsza :)
 
-Interior_decorator.cpp
+Interior_decorator.cpp 
 
-klasa Display   <--->  Krzyś
-    +funkcja wczytująca osobno budynek(pomieszczenie) i rysująca go. 
+napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów
 
-Common/constrols -> przepisać od nowa { <-----> Krzyś
-              po przepisaniu można opcjonalnie dodać:
-              * zamienić funkcję na klasę obsługującą proces chodzenia
-              ** chodzenie zamiast latania 
-              ** wykrywanie ścian (każdy obiekt musiałby mieć trzy nowe atrybuty w RawObjData opisujące rozmiar boxu obiektu
-              ew. dwa rozmiary by tylko opisać obwód "z lotu ptaka"
-              ***** skakanie (wiem, mam bujną wyobraźnię ^^)
-}
-Common/objloader -> przepisać od nowa <-----> Aga
-~ Opcjonalne:
-~ Common/quaternion_utils -> przepisać od nowa
-~ Common/transgentspace -> przepisać od nowa
-~ Common/text2D -> przepisać od nowa
-Common/texture -> przepisać od nowa
-Common/vboindexer -> przepisać od nowa
-
-Interfejs umożliwiający wybranie i przesuwanie obiektu w trakcie działania programu 
-- musiałby zmieniać dane wewnątrz klasy RawObjData jak i faktyczne położenie wyświetlanego przedmiotu. 
-
-napisać lub zdobyć (opcjonalne) fragment i vertex shadery dajęce efekty różnych materiałów (o ile tak się da xD)
-
-zmienić CMakelists tak, aby była w pełni zrozumiała, tylko i wyłącznie nasza.
