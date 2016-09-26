@@ -126,11 +126,14 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			// 2. Specular maps
 			vector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+			// 3. Reflection maps (Note that ASSIMP doesn't load reflection maps properly from wavefront objects, so we'll cheat a little by defining the reflection maps as ambient maps in the .obj file, which ASSIMP is able to load)
+			vector<Texture> reflectionMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_reflection");
+			textures.insert(textures.end(), reflectionMaps.begin(), reflectionMaps.end());
 		}
 
 		// Return a mesh object created from the extracted mesh data
 		return Mesh(vertices, indices, textures);
-	}
+}
 
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 	// The required info is returned as a Texture struct.
@@ -142,14 +145,28 @@ vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 			aiString str;
 			mat->GetTexture(type, i, &str);
 			// Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-			Texture texture;
-			texture.id = TextureFromFile(str.C_Str(), this->directory);
-			texture.type = typeName;
-			texture.path = str;
-			textures.push_back(texture);
+			GLboolean skip = false;
+			for (GLuint j = 0; j < textures_loaded.size(); j++)
+			{
+				if (textures_loaded[j].path == str)
+				{
+					textures.push_back(textures_loaded[j]);
+					skip = true; // A texture with the same filepath has already been loaded, continue to next one. (optimization)
+					break;
+				}
+			}
+			if (!skip)
+			{   // If texture hasn't been loaded already, load it
+				Texture texture;
+				texture.id = TextureFromFile(str.C_Str(), this->directory);
+				texture.type = typeName;
+				texture.path = str;
+				textures.push_back(texture);
+				this->textures_loaded.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
+			}
 		}
 		return textures;
-	}
+}
 
 
 

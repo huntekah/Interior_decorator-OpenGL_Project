@@ -23,6 +23,7 @@ private:
 	/*  Model Data  */
 	vector<Mesh> meshes;
 	string directory;
+	vector<Texture> textures_loaded;
 
 	/*  Functions   */
 	// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
