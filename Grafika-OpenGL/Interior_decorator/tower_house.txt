@@ -34,13 +34,12 @@ Models//KaraArmchair//fade01.obj	movable	FragmentShader_tower_house.frag	VertexS
 -0.0237929	0	0.0251127	0
 1.15463	4.72811	-1.25235	1
 Models//lawka//bank_optimized.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
-0.00032823	7.4817e-06	-0.00128756	0
-2.18218e-05	0.00143014	1.2524e-05	0
-0.00132331	-2.54392e-05	0.000325404	0
+0.00200494	4.57008e-05	-0.00786487	0
+0.000131233	0.00860063	7.53173e-05	0
+0.0103825	-0.000199592	0.00255307	0
 -4.31663	-1.41775	3.81049	1
 Models//RaceCar//Race_Car1.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.00885983	-2.63702e-05	0.00308189	0
 -8.94447e-05	0.0118458	0.000307891	0
 -0.00390489	-0.00033117	0.0107677	0
-0.44913	-1.24711	-0.554664	1
-
+0.754636	-1.22148	-1.38722	1
