@@ -77,12 +77,12 @@ void main(){
 		MaterialAmbientColor +
 		vec4(shine,0) * pow(cosTheta_obj,3) + vec4(shine,0) * pow(cosAlpha_obj,60) +
 		// Diffuse : "color" of the object
-		MaterialDiffuseColor * LightColor * LightPower_obj * cosTheta_obj / (distance_obj*distance_obj) +
+		MaterialDiffuseColor * WhiteLight * LightPower_obj * cosTheta_obj / (distance_obj*distance_obj) +
 		// Specular : reflective highlight, like a mirror
-		0.6 * MaterialSpecularColor * WhiteColor * LightPower_obj * pow(cosAlpha_obj,60) / (distance_obj*distance_obj)+
+		0.6 * MaterialSpecularColor * WhiteLight * LightPower_obj * pow(cosAlpha_obj,60) / (distance_obj*distance_obj)+
 		// Linear Specular light color
 		0.015 * MaterialSpecularColor * WhiteLight * LightPower_obj * pow(cosAlpha_obj,5) / (distance_obj/20) + 
 		//White Diffusion
-		WhiteLight * MaterialDiffuseColor * LightColor * LightPower_obj * cosTheta_obj / (distance_obj*distance_obj)
+		WhiteLight * MaterialDiffuseColor * WhiteLight * LightPower_obj * cosTheta_obj / (distance_obj*distance_obj)
 		;
 }

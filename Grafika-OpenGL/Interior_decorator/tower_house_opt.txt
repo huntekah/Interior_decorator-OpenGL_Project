@@ -68,5 +68,5 @@ Models//RaceCar_opt//Race_Car_opt.obj	movable	FragmentShader_tower_house.frag	Ve
 -0.00390489	-0.00033117	0.0107677	0
 0.44913	-1.24711	-0.554664	1
 0	5	0
-3000
+500
 
