@@ -136,7 +136,7 @@ bool Display::Draw()
 
 			model[i].Draw(shader[ObjToProgramID[i]]);
 
-			std::cout << data[i] << endl;
+			//std::cout << data[i] << endl;
 		}
 	}
 	skybox.Draw(skyboxShader,viewMatrix,projectionMatrix);

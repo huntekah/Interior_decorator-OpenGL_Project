@@ -179,7 +179,7 @@ GLint TextureFromFile(const char* path, string directory)
 	GLuint textureID;
 	glGenTextures(1, &textureID);
 	int width, height;
-	std::cout << "filename.c_str() = " << filename.c_str() << " \n";
+	std::cout << "img: " << filename.c_str() << " \n";
 	unsigned char* image = load_img(filename.c_str(), &width, &height, NULL, 3);
 	// Assign texture to ID
 	glBindTexture(GL_TEXTURE_2D, textureID);
