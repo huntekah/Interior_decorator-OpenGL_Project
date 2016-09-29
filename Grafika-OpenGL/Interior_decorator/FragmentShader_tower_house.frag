@@ -61,7 +61,7 @@ void main(){
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	float cosAlpha_obj = clamp( dot( E, R_obj), 0 , 1);
 	
-	color =  /*vec4(shine,0) * MaterialDiffuseColor + vec4(shine,0) * pow(cosTheta,3) + vec4(shine,0) * pow(cosAlpha,60) +
+	color =  0.2*vec4(shine,0) + vec4(shine,0) * MaterialDiffuseColor + vec4(shine,0) * pow(cosTheta,3) + vec4(shine,0) * pow(cosAlpha,60) +
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
 		// Diffuse : "color" of the object
@@ -72,14 +72,14 @@ void main(){
 		0.015 * MaterialSpecularColor * WhiteLight * LightPower * pow(cosAlpha,5) / (distance/20) + 
 		//White Diffusion
 		WhiteLight * MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance)
-		+*/
+		+
 		// CZESC ZE SWIATLEM Z POKOJU
 		MaterialAmbientColor +
 		vec4(shine,0) * pow(cosTheta_obj,3) + vec4(shine,0) * pow(cosAlpha_obj,60) +
 		// Diffuse : "color" of the object
 		MaterialDiffuseColor * LightColor * LightPower_obj * cosTheta_obj / (distance_obj*distance_obj) +
 		// Specular : reflective highlight, like a mirror
-		0.6 * MaterialSpecularColor * LightColor * LightPower_obj * pow(cosAlpha_obj,60) / (distance_obj*distance_obj)+
+		0.6 * MaterialSpecularColor * WhiteColor * LightPower_obj * pow(cosAlpha_obj,60) / (distance_obj*distance_obj)+
 		// Linear Specular light color
 		0.015 * MaterialSpecularColor * WhiteLight * LightPower_obj * pow(cosAlpha_obj,5) / (distance_obj/20) + 
 		//White Diffusion
