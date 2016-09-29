@@ -36,14 +36,14 @@ private:
 	std::vector<GLuint> texture;		// 1 .. 1
 	std::vector<GLuint> textureID;		// 1 .. 1
 	
-	std::vector<std::vector<glm::vec3>> vertices;	// 1 .. 1
-	std::vector<std::vector<glm::vec2>> uvs;		// 1 .. 1
-	std::vector<std::vector<glm::vec3>> normals;	// 1 .. 1
+	std::vector<std::vector<glm::vec3> > vertices;	// 1 .. 1
+	std::vector<std::vector<glm::vec2> > uvs;		// 1 .. 1
+	std::vector<std::vector<glm::vec3> > normals;	// 1 .. 1
 
-	std::vector<std::vector<unsigned short>> indices;	// 1 .. 1
-	std::vector<std::vector<glm::vec3>> indexedVertices;// 1 .. 1
-	std::vector<std::vector<glm::vec2>> indexedUvs;		// 1 .. 1
-	std::vector<std::vector<glm::vec3>> indexedNormals;	// 1 .. 1
+	std::vector<std::vector<unsigned short> > indices;	// 1 .. 1
+	std::vector<std::vector<glm::vec3> > indexedVertices;// 1 .. 1
+	std::vector<std::vector<glm::vec2> > indexedUvs;		// 1 .. 1
+	std::vector<std::vector<glm::vec3> > indexedNormals;	// 1 .. 1
 
 	std::vector<GLuint> vertexBuffer;	// 1 .. 1
 	std::vector<GLuint> uvBuffer;		// 1 .. 1

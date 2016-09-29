@@ -6,8 +6,8 @@
 
 #include <glm/glm.hpp>
 // Shader handling
-#include "utilities\Shader.h"
-#include "utilities\img_load.h"
+#include "Shader.h"
+#include "img_load.h"
 
 
 class Skybox {

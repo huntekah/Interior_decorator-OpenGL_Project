@@ -9,7 +9,7 @@ ControlObjects::ControlObjects(GLFWwindow * const & window_,  glm::vec3 translat
 {
 	transformation_t = none_t;
 	ObjectID = 0;
-	transformationSpeed = 1.0;
+	transformationSpeed = 10.0;
 	keyRepeatTempoID = SetMeasureTempo(0.3);
 	increasedID = true;
 }

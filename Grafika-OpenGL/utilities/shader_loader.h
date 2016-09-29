@@ -16,8 +16,8 @@
 
 class ShaderLoader{
 private:
-	bool ShaderLoader::IsNewShader(int objID, std::vector<RawObjData>& data);
-	int ShaderLoader::GetSimilarShaders(int objID, std::vector<RawObjData>& data, std::vector<int>& ObjToProgramID);
+	bool IsNewShader(int objID, std::vector<RawObjData>& data);
+	int GetSimilarShaders(int objID, std::vector<RawObjData>& data, std::vector<int>& ObjToProgramID);
 protected:
 	void LoadShaders(std::vector<RawObjData>& data,
 						std::vector<int>& ObjToProgramID,

@@ -6,7 +6,7 @@ class Time {
 protected:
 	double lastTime;
 	double deltaTime;
-	std::vector<std::pair<double,double>> tempo;
+	std::vector<std::pair<double,double> > tempo;
 	void InitializeTime();
 	double SetDeltaTime();
 public:
