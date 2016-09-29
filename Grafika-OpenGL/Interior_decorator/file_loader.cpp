@@ -12,7 +12,8 @@ int FileLoader::LoadNextObject()
 		std::string FragmentShaderPath;
 		std::string VertexShaderPath;
 		glm::mat4 modelMatrix;
-
+		glm::vec3 lightPos;
+		float lightPower;
 		//file.good checks if there are no errors and it is not EOF, so I can safely read more data;
 		if (!file.good()) return -1;
 		
@@ -22,7 +23,8 @@ int FileLoader::LoadNextObject()
 		file >> FragmentShaderPath;
 		file >> VertexShaderPath;
 		file >> modelMatrix;
-		
+		file >> lightPos;
+		file >> lightPower;
 
 		/*	Either no characters were extracted, or the characters extracted
 		could not be interpreted as a valid value of the appropriate type.*/
@@ -30,7 +32,7 @@ int FileLoader::LoadNextObject()
 
 		data.emplace_back(ObjFilePath, type,
 			FragmentShaderPath, VertexShaderPath,
-			data.size(), modelMatrix);
+			data.size(), modelMatrix, lightPos, lightPower);
 
 		return 0;
 	}
@@ -49,6 +51,8 @@ int FileLoader::SaveObject(int id)
 		file << data[id].fragmentShaderPath << "\t";
 		file << data[id].vertexShaderPath << "\n";
 		file << data[id].modelMatrix;
+		file << data[id].lightPos;
+		file << data[id].lightPower<< "\n\n";
 
 		/*Some errors occured duh*/
 		if (!file.good()) return -1;
@@ -76,6 +80,7 @@ int FileLoader::Load(const std::string path)
 	int result = 0;
 	while (!file.eof()) {
 		result = LoadNextObject();
+		std::cout << data.back() << std::endl; // TESTOWE WYSWIETLANIE
 		if (result == -1) {
 			std::cout << "Error with file: " << path << "\n";
 			return -1;	//not enough variables  
@@ -158,5 +163,17 @@ std::fstream & operator<<(std::fstream & screen, glm::mat4 & modelMatrix)
 	screen << modelMatrix[1][0] << "\t" << modelMatrix[1][1] << "\t" << modelMatrix[1][2] << "\t" << modelMatrix[1][3] << "\n";
 	screen << modelMatrix[2][0] << "\t" << modelMatrix[2][1] << "\t" << modelMatrix[2][2] << "\t" << modelMatrix[2][3] << "\n";
 	screen << modelMatrix[3][0] << "\t" << modelMatrix[3][1] << "\t" << modelMatrix[3][2] << "\t" << modelMatrix[3][3] << "\n";
+	return screen;
+}
+
+std::fstream & operator>>(std::fstream & screen, glm::vec3 & lightPos)
+{
+	screen >> lightPos.x >> lightPos.y >> lightPos.z;
+	return screen;
+}
+
+std::fstream & operator<<(std::fstream & screen, glm::vec3 & lightPos)
+{
+	screen << lightPos.x << "\t" << lightPos.y << "\t" << lightPos.z << "\n";
 	return screen;
 }

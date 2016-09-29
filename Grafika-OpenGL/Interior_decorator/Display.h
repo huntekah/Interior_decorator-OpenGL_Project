@@ -50,14 +50,16 @@ private:
 	std::vector<GLuint> normalBuffer;	// 1 .. 1
 	std::vector<GLuint> elementBuffer;	// 1 .. 1
 
-	std::vector<GLuint> lightID;		// 1 .. many
+	std::vector<GLuint> lightID;		// 1 .. many (per shader)
+	std::vector<GLuint> lightPowerID;	// 1.. many (per shader)
+	std::vector<GLuint> lightGlobalID;		// 1 .. many (per shader)
 
 
 	//inicialised not to inicialise them in each draw loop;
 	glm::mat4 projectionMatrix;
 	glm::mat4 viewMatrix;
 	
-	glm::vec3 lightPos;
+	glm::vec3 lightGlobalPos;
 
 	//std::vector<glm::mat4> modelMatrix;	// 1 .. 1
 	std::vector<glm::mat4> MVP;			// 1 .. 1

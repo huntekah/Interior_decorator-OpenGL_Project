@@ -3,13 +3,22 @@ Models//lawka//bank_optimized.obj	movable	FragmentShader_tower_house.frag	Vertex
 -0.00166171	0.00743357	0.00247274	0
 0.00774821	0.00124886	0.00146612	0
 -2.26215	0.918292	-4.34672	1
-Models//RaceCar//Race_Car_reduced.obj	movable	FragmentShader_tower_house2.frag	VertexShader_tower_house2.vert
+10	0	0
+100
+
+Models//RaceCar_opt//Race_Car_opt.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.00728491	6.82786e-05	0.00660757	0
 4.75779e-05	0.0118485	-0.000131216	0
 -0.00675393	0.00015711	0.00702384	0
 -2.33973	-0.246556	-4.54938	1
+0	0	10
+2
+
 Models//my_box//box.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
-0.00728491	6.82786e-05	0.00660757	0
-4.75779e-05	0.0118485	-0.000131216	0
--0.00675393	0.00015711	0.00702384	0
--2.33973	-0.246556	-4.54938	1
+0.503243	-0.000256237	0.159766	0
+0.00250143	0.622939	-0.00689872	0
+-0.153056	0.00901142	0.484381	0
+-4.3962	1.76103	-5.18841	1
+0	10	0
+300
+

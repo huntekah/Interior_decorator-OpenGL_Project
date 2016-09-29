@@ -40,7 +40,9 @@ void Display::LoadIntoVBO()
 {
 	for (unsigned int i = 0; i < data.size(); i++) {
 		glUseProgram(shader[ ObjToProgramID[i] ].Program);
-		lightID.emplace_back( glGetUniformLocation(  (shader[ ObjToProgramID[i] ]).Program, "LightPosition_worldspace" ) );
+		lightGlobalID.emplace_back(glGetUniformLocation((shader[ObjToProgramID[i]]).Program, "LightPosition_worldspace"));
+		lightPowerID.emplace_back(glGetUniformLocation((shader[ObjToProgramID[i]]).Program, "LightPower_obj"));
+		lightID.emplace_back(glGetUniformLocation((shader[ObjToProgramID[i]]).Program, "LightPosition_obj"));
 	}
 	shineID = glGetUniformLocation( (shader[ObjToProgramID[0]]).Program, "shine" );
 }
@@ -119,8 +121,12 @@ bool Display::Draw()
 			else glUniform3f(shineID, 0, 0, 0);
 
 
-			lightPos = glm::vec3(4, 34, 4);
-			glUniform3f(lightID[ObjToProgramID[i]], lightPos.x, lightPos.y, lightPos.z);
+			lightGlobalPos = glm::vec3(4, 34, 4);
+			glUniform3f(lightGlobalID[ObjToProgramID[i]], lightGlobalPos.x, lightGlobalPos.y, lightGlobalPos.z);
+			
+			glUniform3f(lightID[ObjToProgramID[i]], data[i].lightPos.x, data[i].lightPos.y, data[i].lightPos.z);
+			glUniform1f(lightPowerID[ObjToProgramID[i]], data[i].lightPower);
+
 			glUniformMatrix4fv(viewMatrixID[ObjToProgramID[i]], 1, GL_FALSE, &viewMatrix[0][0]);
 
 			MVP[i] = projectionMatrix * viewMatrix * data[i].modelMatrix; /*TOCHANGE ProjectionMatrix * ViewMatrix powinno być jedną zmienną (by nie mnożyć tego non stop)*/
@@ -130,6 +136,7 @@ bool Display::Draw()
 
 			model[i].Draw(shader[ObjToProgramID[i]]);
 
+			std::cout << data[i] << endl;
 		}
 	}
 	skybox.Draw(skyboxShader,viewMatrix,projectionMatrix);

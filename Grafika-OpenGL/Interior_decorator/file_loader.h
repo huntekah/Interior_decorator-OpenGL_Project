@@ -37,6 +37,8 @@ std::ostream & operator<<(std::ostream &screen, FileLoader &FileData);
 //used for saving and loading to file
 std::fstream & operator>>(std::fstream &screen, glm::mat4 &modelMatrix);
 std::fstream & operator<<(std::fstream &screen, glm::mat4 &modelMatrix);
+std::fstream & operator>>(std::fstream &screen, glm::vec3 &lightPos);
+std::fstream & operator<<(std::fstream &screen, glm::vec3 &lightPos);
 
 
 /*

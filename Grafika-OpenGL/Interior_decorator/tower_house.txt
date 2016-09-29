@@ -3,21 +3,33 @@ Models//tower_house//Tower_House.obj	const	FragmentShader_tower_house.frag	Verte
 0.0211033	0.995547	0.00911245	0
 0.352211	0.00790029	-0.970082	0
 0.534561	-1.4412	0.0877957	1
+0	10	0
+300
+
 Models//nano//nanosuit.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.15706	-0.0014375	0.0479209	0
 -0.0018176	0.164304	0.0108831	0
 -0.0478789	-0.0108399	0.156601	0
 1.50708	7.50769	3.33795	1
+0	10	0
+300
+
 Models//bedside_table//Skin_A//Table_de_nuit_Final.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 -0.0091472	-0.000383247	0.0237367	0
 0.000606093	0.0309772	0.000313882	0
 -0.0287578	0.000749536	-0.00892584	0
 2.23061	1.61961	1.63231	1
+0	10	0
+300
+
 Models//washbasin//Lavabo.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.0285674	0	0.0090071	0
 0	0.0237018	0	0
 -0.0104621	0	0.0255939	0
 1.86862	1.51666	-0.660713	1
+0	10	0
+300
+
 Models//wooden_table//Wooden_Table_noground.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.0152251	5.89761e-07	0.00598248	0
 1.40263e-06	0.0177034	-5.41631e-06	0
