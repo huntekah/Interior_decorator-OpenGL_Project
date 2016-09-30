@@ -3,55 +3,77 @@ Models//tower_house//Tower_House.obj	const	FragmentShader_tower_house.frag	Verte
 0.0211033	0.995547	0.00911245	0
 0.352211	0.00790029	-0.970082	0
 0.534561	-1.4412	0.0877957	1
-0	10	0
-300
+4	34	4
+125
 
 Models//nano//nanosuit.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.15706	-0.0014375	0.0479209	0
 -0.0018176	0.164304	0.0108831	0
 -0.0478789	-0.0108399	0.156601	0
 1.50708	7.50769	3.33795	1
-0	10	0
-300
+4	34	4
+125
 
 Models//bedside_table//Skin_A//Table_de_nuit_Final.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 -0.0091472	-0.000383247	0.0237367	0
 0.000606093	0.0309772	0.000313882	0
 -0.0287578	0.000749536	-0.00892584	0
 2.23061	1.61961	1.63231	1
-0	10	0
-300
+2.2	3.5	3
+0.7
+
 
 Models//washbasin//Lavabo.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.0285674	0	0.0090071	0
 0	0.0237018	0	0
 -0.0104621	0	0.0255939	0
 1.86862	1.51666	-0.660713	1
-0	10	0
-300
+1.8	3.5	-0.6
+1
 
 Models//wooden_table//Wooden_Table_noground.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.0152251	5.89761e-07	0.00598248	0
 1.40263e-06	0.0177034	-5.41631e-06	0
 -0.00574427	5.8858e-06	0.0156911	0
 -0.54189	7.60285	-0.859699	1
+4 34 4
+125
+
 Models//bed//bed.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 -0.0913109	0	-0.0318333	0
 0	0.0989826	0	0
 0.0326043	0	-0.0897227	0
 2.49444	5.1889	0.690543	1
+3.6	5.6	-1.1
+2
+
 Models//KaraArmchair//fade01.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.0255984	0	0.0233046	0
 0	0.0360386	0	0
 -0.0237929	0	0.0251127	0
 1.15463	4.72811	-1.25235	1
+3.6	5.6	-1.1
+3
+
 Models//lawka//bank_optimized.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.00200494	4.57008e-05	-0.00786487	0
 0.000131233	0.00860063	7.53173e-05	0
 0.0103825	-0.000199592	0.00255307	0
 -4.31663	-1.41775	3.81049	1
+4	34	4
+125
 Models//RaceCar//Race_Car1.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
 0.00885983	-2.63702e-05	0.00308189	0
 -8.94447e-05	0.0118458	0.000307891	0
 -0.00390489	-0.00033117	0.0107677	0
 0.754636	-1.22148	-1.38722	1
+0.4	1.4	-0.5
+3
+
+Models//my_box//box.obj	movable	FragmentShader_tower_house.frag	VertexShader_tower_house.vert
+0.00885983	-2.63702e-05	0.00308189	0
+-8.94447e-05	0.0118458	0.000307891	0
+-0.00390489	-0.00033117	0.0107677	0
+0.44913	-1.24711	-0.554664	1
+0.4	1.4	-0.5
+3
